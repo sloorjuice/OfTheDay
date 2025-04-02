@@ -47,6 +47,12 @@
   color: #3498db;
 }
 
+/* Coffee text styling */
+.coffee-text {
+  margin: 0;
+}
+
+
 /* Media query for responsive design */
 @media (max-width: 768px) {
   .footer-container {
@@ -60,5 +66,10 @@
 
   .social-icons {
     justify-content: center;
+  }
+
+  /* Hide coffee text on mobile */
+  .coffee-text {
+    display: none;
   }
 }
