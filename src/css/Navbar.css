@@ -36,6 +36,28 @@
   text-decoration: none;
   display: inline-block;  /* Allows for the hover effect to work properly */
   transition: transform 0.3s ease, color 0.3s ease;  /* Smooth transition for hover effect */
+  border-bottom: 3px solid #3498db; /* Add blue underline matching home page theme */
+  padding-bottom: 2px; /* Space between text and underline */
+  position: relative;
+  overflow: hidden; /* Contains the animation effect */
+}
+
+.navbar-brand a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -2px;
+  left: 0;
+  background-color: #3498db; /* Same blue color */
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.navbar-brand a:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .navbar-brand a:hover {
