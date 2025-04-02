@@ -15,10 +15,25 @@ main {
   max-width: 1280px;
   margin: 0 auto;
   width: 100%;
-  margin-top: 80px; /* Add margin to account for fixed navbar height */
+  margin-top: 80px; /* Default margin for desktop */
   margin-bottom: 60px; /* Add margin to account for fixed footer height */
   overflow-y: auto; /* Allow main content to scroll independently */
   padding-bottom: 2rem; /* Add some bottom padding to prevent content from being hidden behind footer */
+}
+
+/* Increase top margin for mobile to account for taller navbar */
+@media (max-width: 1448px) {
+  main {
+    margin-top: 110px; /* Increased margin to account for taller navbar on mobile */
+  }
+}
+
+/* Further adjust for smaller screens if needed */
+@media (max-width: 768px) {
+  main {
+    margin-top: 120px; /* May need more space on very small screens */
+    padding: 1.5rem; /* Slightly reduce side padding on small screens */
+  }
 }
 
 .logo {

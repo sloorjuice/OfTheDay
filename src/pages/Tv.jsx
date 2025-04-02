@@ -1,4 +1,3 @@
-import '../css/Tv.css';
 function Tv() {
   return (
     <div className="tv">

@@ -16,16 +16,15 @@ function Navbar() {
             <div className="navbar-container">
                 <div className="navbar-brand">
                     <Link to="/"><strong>Of The Day!</strong></Link>
-                </div>
-                
-                <div className="navbar-date">
-                    <a href={date_link} target="_blank" rel="noopener noreferrer">
-                        {new Date().toLocaleDateString('en-US', { 
-                            weekday: 'long',
-                            month: 'long', 
-                            day: 'numeric' 
-                        })}
-                    </a>
+                    <div className="navbar-date">
+                        <a href={date_link} target="_blank" rel="noopener noreferrer">
+                            {new Date().toLocaleDateString('en-US', { 
+                                weekday: 'long',
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}
+                        </a>
+                    </div>
                 </div>
                 
                 <div className="navbar-menu">

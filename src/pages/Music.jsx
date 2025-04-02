@@ -1,4 +1,3 @@
-import '../css/Music.css';
 function Music() {
   return (
     <div className="music">

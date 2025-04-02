@@ -1,4 +1,3 @@
-import '../css/Movies.css';
 function Movies() {
   return (
     <div className="movies">
