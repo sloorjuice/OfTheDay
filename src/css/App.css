@@ -15,6 +15,10 @@ main {
   max-width: 1280px;
   margin: 0 auto;
   width: 100%;
+  margin-top: 80px; /* Add margin to account for fixed navbar height */
+  margin-bottom: 60px; /* Add margin to account for fixed footer height */
+  overflow-y: auto; /* Allow main content to scroll independently */
+  padding-bottom: 2rem; /* Add some bottom padding to prevent content from being hidden behind footer */
 }
 
 .logo {
