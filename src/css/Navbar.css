@@ -26,6 +26,9 @@
   text-align: left;  /* Align text to the left */
   letter-spacing: 0.05em;  /* Add slight letter spacing */
   text-transform: uppercase;  /* Optional: Make it all uppercase */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .navbar-brand a {
@@ -41,15 +44,31 @@
   transform: scale(1.05);  /* Slightly increase size on hover */
 }
 
+/* Changed: Position date absolutely in normal view */
 .navbar-date {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #ecf0f1;
-  position: absolute;  /* Position absolutely */
-  left: 50%;  /* Move to center */
-  transform: translateX(-50%);  /* Perfect centering */
   white-space: nowrap;  /* Prevent wrapping */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+  margin-top: 0; /* Remove the negative margin */
+}
+
+.navbar-date a {
+  color: #ecf0f1;
+  text-decoration: none;
   border-bottom: 2px solid #3498db;  /* Add underline with color */
   padding-bottom: 3px;  /* Add some space between text and underline */
+  font-weight: normal;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-date a:hover {
+  color: #3498db;
+  transform: none; /* Prevent date from scaling */
 }
 
 .navbar-menu {
@@ -143,7 +162,7 @@
 }
 
 /* Mobile navigation */
-@media (max-width: 768px) {
+@media (max-width: 1448px) {
   .navbar-container {
     position: relative;
     flex-wrap: nowrap;
@@ -155,15 +174,24 @@
     font-size: 1.3rem;
     min-width: auto;
     z-index: 1010;
+    display: flex; /* Add display flex for mobile */
+    flex-direction: column; /* Stack title and date vertically */
+    align-items: center; /* Center items for mobile view */
   }
   
+  /* Changed: Position date relative in mobile view */
   .navbar-date {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1005;
-    width: auto;
-    text-align: center;
+    position: relative; /* Change from absolute to relative */
+    left: auto; /* Reset left position */
+    transform: none; /* Reset transform */
+    top: auto; /* Reset top position */
+    margin-top: 0.2rem; /* Add small gap between brand and date */
+    font-size: 0.8rem;
+  }
+  
+  /* No need for the extra padding at the bottom of navbar anymore */
+  .navbar {
+    padding-bottom: 1rem;
   }
   
   .menu-toggle {

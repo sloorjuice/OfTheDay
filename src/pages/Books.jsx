@@ -1,5 +1,3 @@
-import '../css/Books.css';
-
 function Books() {
   return (
     <div className="books">

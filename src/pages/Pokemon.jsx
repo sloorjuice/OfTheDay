@@ -1,5 +1,3 @@
-import '../css/Pokemon.css';
-
 function Pokemon() {
     return (
         <div className="pokemon">
