@@ -39,11 +39,11 @@ function Navbar() {
                     <ul className={menuOpen ? 'open' : ''}>
                         <li><NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink></li>
                         <li><NavLink to="/music" onClick={() => setMenuOpen(false)}>Music</NavLink></li>
-                        <li><NavLink to="/pokemon" onClick={() => setMenuOpen(false)}>Pokemon</NavLink></li>
                         <li><NavLink to="/games" onClick={() => setMenuOpen(false)}>Games</NavLink></li>
                         <li><NavLink to="/movies" onClick={() => setMenuOpen(false)}>Movies</NavLink></li>
                         <li><NavLink to="/tv" onClick={() => setMenuOpen(false)}>TV Shows</NavLink></li>
                         <li><NavLink to="/books" onClick={() => setMenuOpen(false)}>Books</NavLink></li>
+                        <li><NavLink to="/pokemon" onClick={() => setMenuOpen(false)}>Pokemon</NavLink></li>
                     </ul>
                 </div>
             </div>
