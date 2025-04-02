@@ -10,7 +10,7 @@ function Footer() {
                 <div className="footer-right">
                     <div className="social-icons">
                         <a href="https://linktr.ee/sloorjuice" target="_blank" rel="noopener noreferrer">Follow Me!</a>
-                        <p>I Need Coffee. ^</p>
+                        <p className="coffee-text">I Need Coffee. ^</p>
                     </div>
                 </div>
             </div>
