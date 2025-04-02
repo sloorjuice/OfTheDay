@@ -1,0 +1,124 @@
+.navbar {
+  background-color: #2c3e50;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: relative;
+}
+
+.navbar-container {
+  width: 100%;  /* Changed from max-width: 1280px to take full width */
+  margin: 0 auto;
+  padding: 0 1.5rem;  /* Reduced side padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.6rem;  /* Increased from 1rem to 1.6rem */
+  font-weight: 700;
+  color: #ecf0f1;
+  text-decoration: none;
+  min-width: 150px;  /* Add minimum width to match menu width */
+  text-align: left;  /* Align text to the left */
+  letter-spacing: 0.05em;  /* Add slight letter spacing */
+  text-transform: uppercase;  /* Optional: Make it all uppercase */
+}
+
+.navbar-brand a {
+  color: #ecf0f1;
+  text-decoration: none;
+  display: inline-block;  /* Allows for the hover effect to work properly */
+  transition: transform 0.3s ease, color 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+.navbar-brand a:hover {
+  color: #3498db;
+  text-decoration: none;
+  transform: scale(1.05);  /* Slightly increase size on hover */
+}
+
+.navbar-date {
+  font-size: 1rem;
+  color: #ecf0f1;
+  position: absolute;  /* Position absolutely */
+  left: 50%;  /* Move to center */
+  transform: translateX(-50%);  /* Perfect centering */
+  white-space: nowrap;  /* Prevent wrapping */
+  border-bottom: 2px solid #3498db;  /* Add underline with color */
+  padding-bottom: 3px;  /* Add some space between text and underline */
+}
+
+.navbar-menu {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 150px;  /* Add minimum width to match brand */
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.navbar li {
+  margin: 0 0.5rem;  /* Reduced horizontal margin */
+}
+
+.navbar a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 0.5rem;  /* Reduced padding */
+  border-radius: 4px;
+}
+
+.navbar a:hover {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.navbar a.active {
+  color: #3498db;
+  font-weight: 600;
+}
+
+/* Media query for responsive design */
+@media (max-width: 1100px) {
+  .navbar-date {
+    position: relative;  /* Return to normal flow */
+    transform: none;
+    left: auto;
+  }
+  
+  .navbar-container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .navbar ul {
+    justify-content: center;
+  }
+  
+  .navbar-brand, .navbar-menu {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .navbar li {
+    margin: 0.5rem 0;
+  }
+}
