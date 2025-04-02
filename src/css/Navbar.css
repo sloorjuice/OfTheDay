@@ -89,6 +89,8 @@
 .navbar a.active {
   color: #3498db;
   font-weight: 600;
+  border-bottom: 2px solid #3498db; /* Add underline with same color as date */
+  padding-bottom: 3px; /* Add some space between text and underline */
 }
 
 /* Media query for responsive design */
