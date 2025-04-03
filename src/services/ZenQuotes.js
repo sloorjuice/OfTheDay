@@ -3,8 +3,8 @@
  * Documentation: https://zenquotes.io/
  */
 
-// Base URL for the Zen Quotes API
-const API_URL = 'https://zenquotes.io/api';
+// Using our Netlify function proxy instead of calling the API directly
+const API_URL = '/api/FetchQuote';
 
 /**
  * Fetch a random inspirational quote
@@ -12,7 +12,7 @@ const API_URL = 'https://zenquotes.io/api';
  */
 export const getRandomQuote = async () => {
   try {
-    const response = await fetch(`${API_URL}/random`);
+    const response = await fetch(`${API_URL}?endpoint=random`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch quote: ${response.status} ${response.statusText}`);
@@ -48,7 +48,7 @@ export const getRandomQuote = async () => {
  */
 export const getQuoteOfTheDay = async () => {
   try {
-    const response = await fetch(`${API_URL}/today`);
+    const response = await fetch(`${API_URL}?endpoint=today`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch quote of the day: ${response.status} ${response.statusText}`);
@@ -80,7 +80,7 @@ export const getMultipleQuotes = async (count = 5) => {
   const safeCount = Math.min(Math.max(1, count), 50);
   
   try {
-    const response = await fetch(`${API_URL}/quotes/${safeCount}`);
+    const response = await fetch(`${API_URL}?endpoint=quotes/${safeCount}`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch quotes: ${response.status} ${response.statusText}`);
