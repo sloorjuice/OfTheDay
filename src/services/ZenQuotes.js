@@ -4,7 +4,7 @@
  */
 
 // Using our Netlify function proxy instead of calling the API directly
-const API_URL = '/api/FetchQuote';
+const API_URL = '/.netlify/functions/FetchQuote';
 
 /**
  * Fetch a random inspirational quote
@@ -51,6 +51,10 @@ export const getQuoteOfTheDay = async () => {
     const response = await fetch(`${API_URL}?endpoint=today`);
     
     if (!response.ok) {
+      // Debug: Log the actual response content
+      const textResponse = await response.text();
+      console.error('Error response content:', textResponse);
+      
       throw new Error(`Failed to fetch quote of the day: ${response.status} ${response.statusText}`);
     }
     
