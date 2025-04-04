@@ -1,6 +1,7 @@
 .daily-card {
+  width: 100%; /* Take full width of parent */
+  margin: 0 auto 1rem; /* Adjust vertical margin */
   max-width: 500px;
-  margin: 2rem auto;
   padding: 1.5rem;
   border-radius: 8px;
   background-color: #fff;
