@@ -11,7 +11,9 @@ const DailyCard = ({ type = 'song' }) => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/.netlify/functions/getSongOfTheDay')
+    // Add timestamp as cache-busting parameter
+    const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    fetch(`/.netlify/functions/getSongOfTheDay?date=${timestamp}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`API responded with status: ${response.status}`);
