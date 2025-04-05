@@ -20,9 +20,10 @@ exports.handler = async function() {
     
     // Very small offsets to ensure we get results
     // Use different seeds to get variety between categories
-    const trackOffset = (dayOfYear * 7) % 20;  // Range 0-19
-    const albumOffset = (dayOfYear * 13) % 20; // Range 0-19
-    const artistOffset = (dayOfYear * 17) % 20; // Range 0-19
+    // Use more diverse prime numbers for multiplication to increase randomness
+    const trackOffset = (dayOfYear * 19) % 50;  // Increased range 0-49
+    const albumOffset = (dayOfYear * 23) % 50;  // Increased range 0-49
+    const artistOffset = (dayOfYear * 17) % 20; // Keep this as is since it works
     
     console.log(`Offsets: track=${trackOffset}, album=${albumOffset}, artist=${artistOffset}`);
     
@@ -131,6 +132,11 @@ exports.handler = async function() {
 
     return {
       statusCode: 200,
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      },
       body: JSON.stringify({
         song,
         album,
