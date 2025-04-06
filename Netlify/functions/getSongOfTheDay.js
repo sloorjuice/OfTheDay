@@ -9,6 +9,7 @@ exports.handler = async function() {
     
     // Get current date in YYYY-MM-DD format for consistency
     const today = new Date();
+    //const today = new Date('2025-06-04'); // test date
     const dateString = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
     
     // Calculate a stable number for the day (1-365/366)
@@ -17,20 +18,31 @@ exports.handler = async function() {
     const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
     
     console.log(`Date: ${dateString}, Day of year: ${dayOfYear}`);
+
+    const minYear = 1980;
+    const maxYear = 2025;
+    const yearRange = maxYear - minYear + 1;
+    const randomYear = minYear + (dayOfYear * 97) % yearRange; // 97 = spicy prime
     
     // Very small offsets to ensure we get results
     // Use different seeds to get variety between categories
     // Use more diverse prime numbers for multiplication to increase randomness
-    const trackOffset = (dayOfYear * 19) % 50;  // Increased range 0-49
-    const albumOffset = (dayOfYear * 23) % 50;  // Increased range 0-49
-    const artistOffset = (dayOfYear * 17) % 20; // Keep this as is since it works
+    const baseSeed = today.getFullYear() * 1000 + dayOfYear;
+    const trackOffset = (dayOfYear * 19) % 1000; // instead of 50
+    const albumOffset = dayOfYear % 50; // safe offset
+    const artistOffset = (dayOfYear * 17) % 500;
     
     console.log(`Offsets: track=${trackOffset}, album=${albumOffset}, artist=${artistOffset}`);
     
-    // Simpler, more reliable queries with no year constraints
-    const songQuery = "tag:new genre:pop";
-    const albumQuery = "tag:new genre:rock"; 
-    const artistQuery = "genre:pop OR genre:rock";
+    const genres = ['pop', 'rock', 'hip-hop', 'indie', 'jazz', 'electronic', 'country', 'metal'];
+    const genreOfDay = genres[dayOfYear % genres.length];
+    console.log(`Genre of the day: ${genreOfDay}`);
+
+    const randomLetter = String.fromCharCode(97 + (dayOfYear % 26)); // 'a' to 'z'
+
+    const songQuery = `genre:${genreOfDay} ${randomLetter}`;
+    const albumQuery = `year:${randomYear}`;
+    const artistQuery = `genre:${genreOfDay}`;
 
     // Storage for our results
     let song = null, album = null, artist = null;
@@ -51,16 +63,21 @@ exports.handler = async function() {
       console.error("Error fetching track:", error.message);
     }
     
+    // Album query logic
     try {
       const albumResponse = await axios.get(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(albumQuery)}&type=album&limit=1&offset=${albumOffset}`, 
+        `https://api.spotify.com/v1/search?q=${encodeURIComponent(albumQuery)}&type=album&limit=50`, 
         { headers }
       );
-      if (albumResponse.data?.albums?.items?.length > 0) {
-        album = albumResponse.data.albums.items[0];
-        console.log("Album found:", album.name);
+      
+      const albums = albumResponse.data?.albums?.items || [];
+      console.log("Album results:", albums.length);
+      
+      if (albums.length > 0) {
+        album = albums[dayOfYear % albums.length];
+        console.log("Selected album:", album.name, "from year", randomYear);
       } else {
-        console.log("No album found with primary query");
+        console.log("No albums found for year", randomYear);
       }
     } catch (error) {
       console.error("Error fetching album:", error.message);
