@@ -19,6 +19,9 @@ exports.handler = async function() {
     
     console.log(`Date: ${dateString}, Day of year: ${dayOfYear}`);
 
+    const limit = 20;
+    const index = dayOfYear % limit; // Stable selection
+
     const minYear = 1980;
     const maxYear = 2025;
     const yearRange = maxYear - minYear + 1;
@@ -50,9 +53,13 @@ exports.handler = async function() {
     // First try: Use the day-based offsets
     try {
       const trackResponse = await axios.get(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(songQuery)}&type=track&limit=1&offset=${trackOffset}`, 
+        `https://api.spotify.com/v1/search?q=${encodeURIComponent(songQuery)}&type=track&limit=${limit}&offset=${trackOffset}`,
         { headers }
       );
+      const tracks = trackResponse.data?.tracks?.items || [];
+      if (tracks.length > 0) {
+        song = tracks[index % tracks.length];
+      }      
       if (trackResponse.data?.tracks?.items?.length > 0) {
         song = trackResponse.data.tracks.items[0];
         console.log("Track found:", song.name);
