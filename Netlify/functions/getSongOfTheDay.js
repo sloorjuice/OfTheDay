@@ -41,9 +41,7 @@ exports.handler = async function() {
     const genreOfDay = genres[dayOfYear % genres.length];
     console.log(`Genre of the day: ${genreOfDay}`);
 
-    const randomLetter = String.fromCharCode(97 + (dayOfYear % 26)); // 'a' to 'z'
-
-    const songQuery = `genre:${genreOfDay} ${randomLetter}`;
+    const songQuery = `genre:${genreOfDay}`;
     const albumQuery = `year:${randomYear}`;
     const artistQuery = `genre:${genreOfDay}`;
 
