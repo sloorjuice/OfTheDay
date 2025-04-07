@@ -1,179 +1,93 @@
-const axios = require('axios');
+const axios = require('axios'); // Importing the Axios library for making HTTP requests.
 
 exports.handler = async function() {
   try {
+    // Fetching the Spotify access token from another Netlify function.
     const tokenResponse = await axios.get(`${process.env.URL}/.netlify/functions/getSpotifyToken`);
-    const accessToken = tokenResponse.data.access_token;
+    const accessToken = tokenResponse.data.access_token; // Extracting the access token from the response.
 
+    // Setting up the Authorization header for Spotify API requests.
     const headers = { 'Authorization': `Bearer ${accessToken}` };
-    
-    // Get current date in YYYY-MM-DD format for consistency
+
+    // Getting today's date and formatting it as YYYY-MM-DD.
     const today = new Date();
-    //const today = new Date('2025-06-04'); // test date
     const dateString = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-    
-    // Calculate a stable number for the day (1-365/366)
+
+    // Calculating the day of the year (1-365/366).
     const startOfYear = new Date(today.getFullYear(), 0, 0);
-    const diff = today - startOfYear;
-    const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-    
-    console.log(`Date: ${dateString}, Day of year: ${dayOfYear}`);
+    const dayOfYear = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24));
 
+    // Setting a limit for the number of items to fetch and determining the index for selection.
     const limit = 20;
-    const index = dayOfYear % limit; // Stable selection
+    const index = dayOfYear % limit;
 
-    const minYear = 1980;
-    const maxYear = 2025;
-    const yearRange = maxYear - minYear + 1;
-    const randomYear = minYear + (dayOfYear * 97) % yearRange; // 97 = spicy prime
-    
-    // Very small offsets to ensure we get results
-    // Use different seeds to get variety between categories
-    // Use more diverse prime numbers for multiplication to increase randomness
-    const baseSeed = today.getFullYear() * 1000 + dayOfYear;
-    const trackOffset = (dayOfYear * 19) % 1000; // instead of 50
-    const albumOffset = dayOfYear % 50; // safe offset
+    // Generating a random year between 1980 and 2025 based on the day of the year.
+    const minYear = 1980, maxYear = 2025;
+    const randomYear = minYear + (dayOfYear * 97) % (maxYear - minYear + 1);
+
+    // Calculating offsets for tracks, albums, and artists to ensure variety.
+    const trackOffset = (dayOfYear * 19) % 1000;
+    const albumOffset = dayOfYear % 50;
     const artistOffset = (dayOfYear * 17) % 500;
-    
-    console.log(`Offsets: track=${trackOffset}, album=${albumOffset}, artist=${artistOffset}`);
-    
+
+    // Defining a list of genres and selecting one based on the day of the year.
     const genres = ['pop', 'rock', 'hip-hop', 'indie', 'jazz', 'electronic', 'country', 'metal'];
     const genreOfDay = genres[dayOfYear % genres.length];
-    console.log(`Genre of the day: ${genreOfDay}`);
 
-    const songQuery = `genre:${genreOfDay}`;
-    const albumQuery = `year:${randomYear}`;
-    const artistQuery = `genre:${genreOfDay}`;
+    // Constructing search queries for Spotify API requests.
+    const queries = {
+      song: `genre:${genreOfDay}`, // Search for songs in the selected genre.
+      album: `year:${randomYear}`, // Search for albums released in the random year.
+      artist: `genre:${genreOfDay}` // Search for artists in the selected genre.
+    };
 
-    // Storage for our results
-    let song = null, album = null, artist = null;
-    
-    // First try: Use the day-based offsets
-    try {
-      const trackResponse = await axios.get(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(songQuery)}&type=track&limit=${limit}&offset=${trackOffset}`,
-        { headers }
-      );
-      const tracks = trackResponse.data?.tracks?.items || [];
-      if (tracks.length > 0) {
-        song = tracks[index % tracks.length];
-      }      
-      if (trackResponse.data?.tracks?.items?.length > 0) {
-        song = trackResponse.data.tracks.items[0];
-        console.log("Track found:", song.name);
-      } else {
-        console.log("No track found with primary query");
-      }
-    } catch (error) {
-      console.error("Error fetching track:", error.message);
-    }
-    
-    // Album query logic
-    try {
-      const albumResponse = await axios.get(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(albumQuery)}&type=album&limit=50`, 
-        { headers }
-      );
-      
-      const albums = albumResponse.data?.albums?.items || [];
-      console.log("Album results:", albums.length);
-      
-      if (albums.length > 0) {
-        album = albums[dayOfYear % albums.length];
-        console.log("Selected album:", album.name, "from year", randomYear);
-      } else {
-        console.log("No albums found for year", randomYear);
-      }
-    } catch (error) {
-      console.error("Error fetching album:", error.message);
-    }
-    
-    try {
-      const artistResponse = await axios.get(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(artistQuery)}&type=artist&limit=1&offset=${artistOffset}`, 
-        { headers }
-      );
-      if (artistResponse.data?.artists?.items?.length > 0) {
-        artist = artistResponse.data.artists.items[0];
-        console.log("Artist found:", artist.name);
-      } else {
-        console.log("No artist found with primary query");
-      }
-    } catch (error) {
-      console.error("Error fetching artist:", error.message);
-    }
-    
-    // Second try: Fallback to zero offset if any are still null
-    if (!song) {
+    // Helper function to fetch data from Spotify API.
+    const fetchSpotifyData = async (query, type, offset = 0, limit = 1) => {
       try {
-        console.log("Trying fallback for track...");
-        const fallbackTrackResponse = await axios.get(
-          `https://api.spotify.com/v1/search?q=${encodeURIComponent("genre:pop")}&type=track&limit=1&offset=0`, 
+        // Making a GET request to Spotify's search endpoint with the query, type, offset, and limit.
+        const response = await axios.get(
+          `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=${type}&limit=${limit}&offset=${offset}`,
           { headers }
         );
-        if (fallbackTrackResponse.data?.tracks?.items?.length > 0) {
-          song = fallbackTrackResponse.data.tracks.items[0];
-          console.log("Track found with fallback:", song.name);
-        }
+        // Returning the items from the response, or an empty array if no items are found.
+        return response.data?.[`${type}s`]?.items || [];
       } catch (error) {
-        console.error("Error in track fallback:", error.message);
+        // Logging any errors that occur during the request and returning an empty array.
+        console.error(`Error fetching ${type}:`, error.message);
+        return [];
       }
-    }
-    
-    if (!album) {
-      try {
-        console.log("Trying fallback for album...");
-        const fallbackAlbumResponse = await axios.get(
-          `https://api.spotify.com/v1/search?q=${encodeURIComponent("genre:rock")}&type=album&limit=1&offset=0`, 
-          { headers }
-        );
-        if (fallbackAlbumResponse.data?.albums?.items?.length > 0) {
-          album = fallbackAlbumResponse.data.albums.items[0];
-          console.log("Album found with fallback:", album.name);
-        }
-      } catch (error) {
-        console.error("Error in album fallback:", error.message);
-      }
-    }
-    
-    if (!artist) {
-      try {
-        console.log("Trying fallback for artist...");
-        const fallbackArtistResponse = await axios.get(
-          `https://api.spotify.com/v1/search?q=${encodeURIComponent("genre:pop")}&type=artist&limit=1&offset=0`, 
-          { headers }
-        );
-        if (fallbackArtistResponse.data?.artists?.items?.length > 0) {
-          artist = fallbackArtistResponse.data.artists.items[0];
-          console.log("Artist found with fallback:", artist.name);
-        }
-      } catch (error) {
-        console.error("Error in artist fallback:", error.message);
-      }
-    }
+    };
 
+    // Fetching tracks, albums, and artists concurrently using Promise.all.
+    const [tracks, albums, artists] = await Promise.all([
+      fetchSpotifyData(queries.song, 'track', trackOffset, limit), // Fetch tracks with the song query.
+      fetchSpotifyData(queries.album, 'album', albumOffset, 50),   // Fetch albums with the album query.
+      fetchSpotifyData(queries.artist, 'artist', artistOffset, 1) // Fetch artists with the artist query.
+    ]);
+
+    // Selecting a song, album, and artist from the fetched data, with fallbacks in case of empty results.
+    const song = tracks[index % tracks.length] || (await fetchSpotifyData('genre:pop', 'track'))[0];
+    const album = albums[dayOfYear % albums.length] || (await fetchSpotifyData('genre:rock', 'album'))[0];
+    const artist = artists[0] || (await fetchSpotifyData('genre:pop', 'artist'))[0];
+
+    // Returning the selected song, album, and artist along with the current date.
     return {
       statusCode: 200,
       headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Cache-Control': 'no-cache, no-store, must-revalidate', // Preventing caching of the response.
         'Pragma': 'no-cache',
         'Expires': '0'
       },
-      body: JSON.stringify({
-        song,
-        album,
-        artist,
-        date: dateString
-      }),
+      body: JSON.stringify({ song, album, artist, date: dateString }), // Sending the data as a JSON response.
     };
   } catch (error) {
+    // Handling errors and returning an appropriate error response.
     console.error('Error in getSongOfTheDay:', error);
-    
     return {
-      statusCode: error.response?.status || 500,
+      statusCode: error.response?.status || 500, // Using the status code from the error response, or 500 by default.
       body: JSON.stringify({ 
-        error: error.message,
-        details: error.response?.data || 'No additional error details available'
+        error: error.message, // Including the error message in the response.
+        details: error.response?.data || 'No additional error details available' // Including additional error details if available.
       }),
     };
   }
