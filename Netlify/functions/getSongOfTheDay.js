@@ -11,7 +11,10 @@ exports.handler = async function() {
 
     // Getting today's date and formatting it as YYYY-MM-DD.
     const today = new Date();
+    //const today = new Date('2025-08-04'); // test date
     const dateString = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+
+    console.log('Today\'s date:', dateString); // Logging today's date for debugging.
 
     // Calculating the day of the year (1-365/366).
     const startOfYear = new Date(today.getFullYear(), 0, 0);
