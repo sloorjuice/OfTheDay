@@ -23,9 +23,9 @@ const DailyCard = ({ type = 'song' }) => {
       .then(data => {
         console.log("API Response:", data); // Debug the full response
         
-        setSong(data.song);
-        setAlbum(data.album);
-        setArtist(data.artist);
+        setSong(data.songOfTheDay);
+        setAlbum(data.albumOfTheDay);
+        setArtist(data.artistOfTheDay);
         
         // Debug info for each item
         console.log("Song data:", data.song);
@@ -99,7 +99,7 @@ const DailyCard = ({ type = 'song' }) => {
         return song ? (
           <>
             <h3 className="card-title">{song.name}</h3>
-            <div className="card-artist">by {song.artists.map(a => a.name).join(', ')}</div>
+            <div className="card-artist">by {song.artist}</div>
             {song.album && (
               <div className="card-album">
                 <span>Album: </span>{song.album.name}
@@ -118,7 +118,7 @@ const DailyCard = ({ type = 'song' }) => {
         return album ? (
           <>
             <h3 className="card-title">{album.name}</h3>
-            <div className="card-artist">by {album.artists.map(a => a.name).join(', ')}</div>
+            <div className="card-artist">by {album.artist}</div>
             {album.release_date && (
               <div className="card-release">
                 <span>Released: </span>{new Date(album.release_date).toLocaleDateString()}
