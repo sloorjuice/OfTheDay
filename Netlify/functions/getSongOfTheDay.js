@@ -19,7 +19,7 @@ exports.handler = async () => {
     const accessToken = tokenData.access_token;
 
     // Seed based on current date
-    //const today = new Date('2022-03-12').toISOString().split('T')[0]; // test date
+    //const today = new Date('2025-04-11').toISOString().split('T')[0]; // test date
     const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
     const seed = Array.from(today).reduce((acc, c) => acc + c.charCodeAt(0), 0);
     const pseudoRandom = (range) => seed % range;
