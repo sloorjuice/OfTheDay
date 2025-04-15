@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-exports.handler = async () => {
+exports.handler = async (event) => {
   try {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -18,46 +18,49 @@ exports.handler = async () => {
     const tokenData = await tokenRes.json();
     const accessToken = tokenData.access_token;
 
-    // Seed based on current date
-    //const today = new Date('2025-04-11').toISOString().split('T')[0]; // test date
-    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    // Use test date if provided, otherwise use today
+    const inputDate = event.queryStringParameters?.date;
+    const today = inputDate || new Date().toISOString().split('T')[0]; // YYYY-MM-DD
     const seed = Array.from(today).reduce((acc, c) => acc + c.charCodeAt(0), 0);
-    const pseudoRandom = (range) => seed % range;
+
+    // Pseudo-random number generator with seed
+    const pseudoRandom = (s) => {
+      const x = Math.sin(s) * 10000;
+      return x - Math.floor(x); // float between 0–1
+    };
 
     const genres = ["pop", "hip-hop", "rock", "electronic", "jazz", "indie", "metal", "classical", "reggae"];
-    const genre = genres[pseudoRandom(genres.length)];
+    const genreIndex = Math.floor(pseudoRandom(seed) * genres.length);
+    const genre = genres[genreIndex];
     const year = 1980 + (seed % 46); // 1980–2025
 
-    const query = `genre:${genre} year:${year}`;
-
-    // Fetch tracks
-    const trackRes = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=50`, {
+    // ---- SONG OF THE DAY ----
+    const songQuery = `genre:${genre} year:${year}`;
+    const songRes = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(songQuery)}&type=track&limit=50`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    const trackData = await trackRes.json();
-    const trackItems = trackData.tracks?.items || [];
+    const songData = await songRes.json();
+    const songItems = songData.tracks?.items || [];
+    const songIndex = Math.floor(pseudoRandom(seed + 1) * songItems.length);
+    const song = songItems[songIndex];
 
-    if (trackItems.length === 0) throw new Error("No tracks found");
-
-    const song = trackItems[pseudoRandom(trackItems.length)];
-
-    // Fetch albums
+    // ---- ALBUM OF THE DAY ----
     const albumRes = await fetch(`https://api.spotify.com/v1/search?q=year:${year}&type=album&limit=50`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     const albumData = await albumRes.json();
     const albumItems = albumData.albums?.items || [];
+    const albumIndex = Math.floor(pseudoRandom(seed + 2) * albumItems.length);
+    const album = albumItems[albumIndex];
 
-    const album = albumItems.length > 0 ? albumItems[pseudoRandom(albumItems.length)] : null;
-
-    // Fetch artists
+    // ---- ARTIST OF THE DAY ----
     const artistRes = await fetch(`https://api.spotify.com/v1/search?q=${genre}&type=artist&limit=50`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     const artistData = await artistRes.json();
     const artistItems = artistData.artists?.items || [];
-
-    const artist = artistItems.length > 0 ? artistItems[pseudoRandom(artistItems.length)] : null;
+    const artistIndex = Math.floor(pseudoRandom(seed + 3) * artistItems.length);
+    const artist = artistItems[artistIndex];
 
     return {
       statusCode: 200,
