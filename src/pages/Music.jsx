@@ -23,16 +23,7 @@ function Music() {
                 title: result.songOfTheDay.name,
                 description: `By: ${result.songOfTheDay.artist}`,
                 image: result.songOfTheDay.album.images[0]?.url,
-                extra: (
-                  <a
-                    href={result.songOfTheDay.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="spotify-link"
-                  >
-                    Listen on Spotify
-                  </a>
-                ),
+                extra: <a href={result.songOfTheDay.url} target="_blank" rel="noopener noreferrer">Listen on Spotify</a>,
               }
             : null,
           albumOfTheDay: result.albumOfTheDay
@@ -40,16 +31,7 @@ function Music() {
                 title: result.albumOfTheDay.name,
                 description: `By: ${result.albumOfTheDay.artist}`,
                 image: result.albumOfTheDay.images[0]?.url,
-                extra: (
-                  <a
-                    href={result.albumOfTheDay.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="spotify-link"
-                  >
-                    View on Spotify
-                  </a>
-                ),
+                extra: <a href={result.albumOfTheDay.url} target="_blank" rel="noopener noreferrer">View on Spotify</a>,
               }
             : null,
           artistOfTheDay: result.artistOfTheDay
@@ -57,16 +39,7 @@ function Music() {
                 title: result.artistOfTheDay.name,
                 description: 'Artist of the Day',
                 image: result.artistOfTheDay.images[0]?.url,
-                extra: (
-                  <a
-                    href={result.artistOfTheDay.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="spotify-link"
-                  >
-                    View on Spotify
-                  </a>
-                ),
+                extra: <a href={result.artistOfTheDay.url} target="_blank" rel="noopener noreferrer">View on Spotify</a>,
               }
             : null,
         };
