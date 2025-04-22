@@ -1,0 +1,73 @@
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content container */
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 80px; /* Default margin for desktop */
+  margin-bottom: 60px; /* Add margin to account for fixed footer height */
+  overflow-y: auto; /* Allow main content to scroll independently */
+  padding-bottom: 2rem; /* Add some bottom padding to prevent content from being hidden behind footer */
+}
+
+/* Increase top margin for mobile to account for taller navbar */
+@media (max-width: 1448px) {
+  main {
+    margin-top: 110px; /* Increased margin to account for taller navbar on mobile */
+  }
+}
+
+/* Further adjust for smaller screens if needed */
+@media (max-width: 768px) {
+  main {
+    margin-top: 120px; /* May need more space on very small screens */
+    padding: 1.5rem; /* Slightly reduce side padding on small screens */
+  }
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}

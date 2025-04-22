@@ -24,7 +24,7 @@ const QuoteComponent = ({ type = 'daily' }) => {
         setQuote(result);
         setError(null);
       } catch (err) {
-        setError('Failed to load quote. Please try again later.');
+        setError(null);
         console.error('Error in QuoteComponent:', err);
       } finally {
         setLoading(false);
@@ -41,7 +41,7 @@ const QuoteComponent = ({ type = 'daily' }) => {
       setQuote(result);
       setError(null);
     } catch (err) {
-      setError('Failed to load a new quote. Please try again later.');
+      setError(null);
     } finally {
       setLoading(false);
     }

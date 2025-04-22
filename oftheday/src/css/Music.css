@@ -1,0 +1,78 @@
+.music-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.music-page h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Grid Layout for the cards */
+.daily-music-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.daily-music-section {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.daily-music-section h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Section headers styling */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.view-solo-link {
+  font-size: 0.85rem;
+  color: #666;
+  text-decoration: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  background-color: #f8f9fa;
+  transition: all 0.2s ease;
+}
+
+.view-solo-link:hover {
+  background-color: #1DB954; /* Spotify green */
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .daily-music-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .daily-music-section {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .daily-music-section {
+    min-width: 280px;
+  }
+}
