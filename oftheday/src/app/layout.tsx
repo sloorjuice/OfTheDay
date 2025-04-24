@@ -1,4 +1,4 @@
-import Metadata from "next";
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -30,7 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        {children}
+        <main className="pt-16">{/* Add padding to account for the navbar height */}
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

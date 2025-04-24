@@ -1,22 +1,43 @@
-import React from 'react';
-import '../css/DailyCard.css';
+import React from "react";
 
-const DailyCard = ({ type, data }) => {
+interface DailyCardProps {
+  type?: string;
+  data?: {
+    image?: string;
+    title: string;
+    description: string;
+    extra?: string;
+  };
+}
+
+const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
   if (!data) {
-    return <div className="daily-card loading">Loading...</div>;
+    return (
+      <div className="w-full max-w-md mx-auto p-6 rounded-lg bg-gray-100 text-gray-500 italic text-center shadow-md">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div className={`daily-card ${type}-card`}>
+    <div
+      className={`w-full max-w-md mx-auto p-6 rounded-lg bg-white shadow-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg ${
+        type ? `${type}-card` : ""
+      }`}
+    >
       {data.image && (
-        <div className="card-image-container">
-          <img src={data.image} alt={`${type} artwork`} className="card-image" />
+        <div className="mb-4 rounded-lg overflow-hidden shadow-sm">
+          <img
+            src={data.image}
+            alt={`${type} artwork`}
+            className="w-full object-cover"
+          />
         </div>
       )}
-      <div className="card-content">
-        <h3 className="card-title">{data.title}</h3>
-        <p className="card-description">{data.description}</p>
-        {data.extra && <p className="card-extra">{data.extra}</p>}
+      <div className="flex flex-col gap-2">
+        <h3 className="text-2xl font-semibold text-gray-800">{data.title}</h3>
+        <p className="text-gray-600">{data.description}</p>
+        {data.extra && <p className="text-gray-500">{data.extra}</p>}
       </div>
     </div>
   );
