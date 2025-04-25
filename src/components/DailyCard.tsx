@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import Image from "next/image";
 
 interface DailyCardProps {
@@ -12,6 +12,17 @@ interface DailyCardProps {
 }
 
 const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
+  const [width, setWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => setWidth(window.innerWidth);
+      handleResize(); // Set initial width
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
   if (!data) {
     return (
       <div className="w-full max-w-md mx-auto p-6 rounded-lg bg-gray-100 text-gray-500 italic text-center shadow-md">
@@ -22,7 +33,9 @@ const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
 
   return (
     <div
-      className={`w-full max-w-md mx-auto p-6 rounded-lg bg-gray-600 shadow-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg ${
+      className={`w-full max-w-md mx-auto p-6 rounded-lg ${
+        width && width < 768 ? "bg-gray-500" : "bg-gray-600"
+      } shadow-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg ${
         type ? `${type}-card` : ""
       }`}
     >
