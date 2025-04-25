@@ -4,6 +4,14 @@ import { useEffect, useState, JSX } from "react";
 import DailyCard from "../../components/DailyCard";
 import SkeletonCard from "../../components/SkeletonCard";
 
+interface RawGameData {
+  name: string;
+  released?: string;
+  rating?: number;
+  background_image?: string;
+  website?: string;
+}
+
 interface GameCardData {
   title: string;
   description: string;
@@ -30,7 +38,7 @@ export default function Games() {
           if (!res.ok) throw new Error("Failed to fetch game data");
           const result = await res.json();
 
-          const transform = (game: any): GameCardData => ({
+          const transform = (game: RawGameData): GameCardData => ({
             title: game?.name || "Untitled",
             description: `Released: ${game?.released || "Unknown"}<br/>Rating: ${game?.rating || "N/A"}`,
             image: game?.background_image,

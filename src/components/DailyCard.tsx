@@ -1,4 +1,5 @@
 import React, { JSX } from "react";
+import Image from "next/image";
 
 interface DailyCardProps {
   type?: string;
@@ -6,7 +7,7 @@ interface DailyCardProps {
     image?: string;
     title: string;
     description: string; // HTML string
-    extra?: string | JSX.Element; // Allow JSX.Element
+    extra?: string | JSX.Element;
   };
 }
 
@@ -27,9 +28,11 @@ const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
     >
       {data.image ? (
         <div className="mb-4 rounded-lg overflow-hidden shadow-xl border border-gray-300">
-          <img
+          <Image
             src={data.image}
             alt={`${type} artwork`}
+            width={500}
+            height={300}
             className="w-full object-cover"
           />
         </div>
