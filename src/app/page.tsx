@@ -40,7 +40,7 @@ const Home = () => {
         </span>
         !
       </h1>
-      <h2 className="text-base sm:text-lg text-white text-center mt-2">
+      <h2 className="text-base sm:text-lg text-center mt-2">
         Discover something new every day.
       </h2>
 

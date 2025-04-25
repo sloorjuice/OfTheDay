@@ -65,7 +65,7 @@ function Music() {
 
   if (loading) {
     return (
-      <main className="min-h-screen px-4 sm:px-8 py-12 text-center text-white">
+      <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
         <h1 className="text-4xl font-bold mb-10">Music of the Day</h1>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
           <SkeletonCard />
@@ -80,7 +80,7 @@ function Music() {
   if (!data) return <div className="music-page">No data available.</div>;
 
   return (
-    <main className="min-h-screen px-4 sm:px-8 py-12 text-center text-white">
+    <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
       <h1 className="text-4xl font-bold mb-10">Music of the Day</h1>
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         <Section title="Song of the Day" content={data.songOfTheDay} type="song" />
