@@ -1,7 +1,9 @@
 export const handler = async (event) => {
   try {
     const inputDate = event.queryStringParameters?.date;
-    const today = inputDate || new Date().toISOString().split("T")[0];
+    const today = inputDate && /^\d{4}-\d{2}-\d{2}$/.test(inputDate)
+      ? inputDate
+      : new Date().toISOString().split("T")[0];
 
     const seed = Array.from(today).reduce((acc, c) => acc + c.charCodeAt(0), 0);
     const pseudoRandom = (s) => {
