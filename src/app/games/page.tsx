@@ -86,7 +86,7 @@ export default function Games() {
 
   if (loading) {
     return (
-      <main className="bg-black min-h-screen px-4 sm:px-8 py-12 text-center text-white">
+      <main className="min-h-screen px-4 sm:px-8 py-12 text-center text-white">
         <h1 className="text-4xl font-bold mb-10">Games of the Day</h1>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
           <SkeletonCard />

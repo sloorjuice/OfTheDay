@@ -23,10 +23,25 @@ export default function Navbar() {
           >
             Of The Day!
           </Link>
+          {/* Date (below title in mobile mode) */}
+          <div className="block 2xl:hidden text-sm text-[#ecf0f1] mt-1">
+            <a
+              href={date_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b-2 border-[#3498db] pb-[2px] hover:text-[#3498db] transition"
+            >
+              {new Date().toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+              })}
+            </a>
+          </div>
         </div>
 
-        {/* Date (absolute on desktop, relative on mobile) */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl text-[#ecf0f1] whitespace-nowrap">
+        {/* Date (centered for desktop mode) */}
+        <div className="hidden 2xl:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl text-[#ecf0f1] whitespace-nowrap">
           <a
             href={date_link}
             target="_blank"
@@ -40,8 +55,6 @@ export default function Navbar() {
             })}
           </a>
         </div>
-
-
 
         {/* Mobile Menu Toggle */}
         <button
