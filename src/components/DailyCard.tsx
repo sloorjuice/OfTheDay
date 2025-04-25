@@ -47,7 +47,7 @@ const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
           className="text-white"
           dangerouslySetInnerHTML={{ __html: data.description }}
         ></p>
-        {data.extra && <p className="text-green-500">{data.extra}</p>}
+        {data.extra && <p className="text-blue-500">{data.extra}</p>}
       </div>
     </div>
   );
