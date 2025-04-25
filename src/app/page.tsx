@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from "react";
 import DailyComponent from "../components/DailyComponent";
 
-import '../css/Home.css'; // Import the Home-specific styles
-
 interface Quote {
   text: string;
   author: string;
