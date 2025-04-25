@@ -4,67 +4,52 @@ exports.handler = async (event) => {
   try {
     const apiKey = process.env.RAWG_API_KEY;
 
-    // Allow date override via query param
+    // Allow overriding the date for testing or specific queries
     const inputDate = event.queryStringParameters?.date;
     const today = inputDate || new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
-    // Calculate day of year for deterministic seeding
+    // Deterministic pseudo-random seed based on day of year
     const dayOfYear = Math.floor(
       (new Date(today) - new Date(today.split('-')[0], 0, 0)) / (1000 * 60 * 60 * 24)
     );
-
     const pseudoRandom = (range) => dayOfYear % range;
 
-    // Fetch games from RAWG API
+    // Fetch genre list
+    const fetchGenres = async () => {
+      const res = await fetch(`https://api.rawg.io/api/genres?key=${apiKey}`);
+      if (!res.ok) throw new Error(`Failed to fetch genres: ${res.status}`);
+      const data = await res.json();
+      return data.results.map((g) => g.slug);
+    };
+
+    // Fetch games, optionally by genre or tag
     const fetchGames = async (value = '', type = 'genres') => {
-      const filterParam = value ? `&${type}=${value}` : '';
-      const url = `https://api.rawg.io/api/games?key=${apiKey}&dates=2000-01-01,${today}&ordering=-rating&page_size=50${filterParam}`;
-
-      const response = await fetch(url);
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`RAWG API error: ${response.status} ${response.statusText} - ${errorText}`);
-      }
-
-      const data = await response.json();
+      const filter = value ? `&${type}=${value}` : '';
+      const url = `https://api.rawg.io/api/games?key=${apiKey}&dates=2000-01-01,${today}&ordering=-rating&page_size=50${filter}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Failed to fetch games: ${res.status}`);
+      const data = await res.json();
       return data.results || [];
     };
 
-    // Fetch genres from RAWG
-    const fetchGenres = async () => {
-      const response = await fetch(`https://api.rawg.io/api/genres?key=${apiKey}`);
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`RAWG Genre API error: ${response.status} ${response.statusText} - ${errorText}`);
-      }
-      const data = await response.json();
-      return data.results.map(g => g.slug);
-    };
-
+    // Get genres and pick one for the day
     const genres = await fetchGenres();
-    const genreIndex = dayOfYear % genres.length;
-    const selectedGenre = genres[genreIndex];
+    const selectedGenre = genres[pseudoRandom(genres.length)];
 
-    // Fetch "Game of the Day"
-    let allGames = await fetchGames(selectedGenre, 'genres');
-    console.log(`Genre of the day: ${selectedGenre}, Games found: ${allGames.length}`);
-
-    if (!allGames || allGames.length === 0) {
-      console.warn(`No games found for genre: ${selectedGenre}, falling back to top-rated games`);
-      allGames = await fetchGames(); // fallback to unfiltered
+    // Get primary game of the day
+    let games = await fetchGames(selectedGenre, 'genres');
+    if (!games.length) {
+      console.warn(`No games found for ${selectedGenre}, using fallback`);
+      games = await fetchGames(); // fallback
     }
+    const gameOfTheDay = games[pseudoRandom(games.length)];
 
-    const gameOfTheDay = allGames.length > 0 ? allGames[pseudoRandom(allGames.length)] : null;
-
-    // Fetch "Multiplayer Game of the Day"
+    // Multiplayer and Indie
     const multiplayerGames = await fetchGames('multiplayer', 'tags');
-    const multiplayerGameOfTheDay =
-      multiplayerGames.length > 0 ? multiplayerGames[pseudoRandom(multiplayerGames.length)] : null;
-
-    // Fetch "Indie Game of the Day"
     const indieGames = await fetchGames('indie', 'genres');
-    const indieGameOfTheDay =
-      indieGames.length > 0 ? indieGames[pseudoRandom(indieGames.length)] : null;
+
+    const multiplayerGame = multiplayerGames[pseudoRandom(multiplayerGames.length)] || null;
+    const indieGame = indieGames[pseudoRandom(indieGames.length)] || null;
 
     return {
       statusCode: 200,
@@ -72,12 +57,12 @@ exports.handler = async (event) => {
         date: today,
         selectedGenre,
         gameOfTheDay,
-        multiplayerGameOfTheDay,
-        indieGameOfTheDay,
+        multiplayerGameOfTheDay: multiplayerGame,
+        indieGameOfTheDay: indieGame,
       }),
     };
   } catch (err) {
-    console.error('Error fetching games:', err);
+    console.error('Game fetch failed:', err.message);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal Server Error', details: err.message }),
