@@ -22,14 +22,14 @@ exports.handler = async (event) => {
       return data.results.map((g) => g.slug);
     };
 
-    // Fetch games, optionally by genre or tag
+    // Fetch games, optionally by genre or tag, excluding indie games
     const fetchGames = async (value = '', type = 'genres') => {
       const filter = value ? `&${type}=${value}` : '';
       const url = `https://api.rawg.io/api/games?key=${apiKey}&dates=2000-01-01,${today}&ordering=-rating&page_size=50${filter}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`Failed to fetch games: ${res.status}`);
       const data = await res.json();
-      return data.results || [];
+      return data.results.filter((game) => !game.genres.some((genre) => genre.slug === 'indie')) || [];
     };
 
     // Get genres and pick one for the day
