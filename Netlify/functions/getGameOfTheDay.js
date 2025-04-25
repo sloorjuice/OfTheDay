@@ -22,27 +22,30 @@ exports.handler = async (event) => {
       return data.results.map((g) => g.slug);
     };
 
-    // Fetch games, optionally by genre or tag, excluding indie games
+    // Fetch games, optionally by genre or tag
     const fetchGames = async (value = '', type = 'genres') => {
       const filter = value ? `&${type}=${value}` : '';
       const url = `https://api.rawg.io/api/games?key=${apiKey}&dates=2000-01-01,${today}&ordering=-rating&page_size=50${filter}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`Failed to fetch games: ${res.status}`);
       const data = await res.json();
-      return data.results.filter((game) => !game.genres.some((genre) => genre.slug === 'indie')) || [];
+      return data.results || [];
     };
 
     // Get genres and pick one for the day
     const genres = await fetchGenres();
-    const selectedGenre = genres[pseudoRandom(genres.length)];
+    let selectedGenre = genres[pseudoRandom(genres.length)];
 
-    // Get primary game of the day
+    // Get primary game of the day, ensuring it's not an indie game
     let games = await fetchGames(selectedGenre, 'genres');
-    if (!games.length) {
-      console.warn(`No games found for ${selectedGenre}, using fallback`);
-      games = await fetchGames(); // fallback
+    let gameOfTheDay = games[pseudoRandom(games.length)];
+
+    while (gameOfTheDay && gameOfTheDay.genres.some((g) => g.slug === 'indie')) {
+      console.warn(`Primary game is indie, picking a different genre`);
+      selectedGenre = genres[pseudoRandom(genres.length)];
+      games = await fetchGames(selectedGenre, 'genres');
+      gameOfTheDay = games[pseudoRandom(games.length)];
     }
-    const gameOfTheDay = games[pseudoRandom(games.length)];
 
     // Multiplayer and Indie
     const multiplayerGames = await fetchGames('multiplayer', 'tags');
