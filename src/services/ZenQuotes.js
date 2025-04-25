@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const ZEN_QUOTES_API_URL = 'https://zenquotes.io/api/today';
 
@@ -17,4 +17,4 @@ const ZenQuotesService = {
   },
 };
 
-module.exports = ZenQuotesService;
+export default ZenQuotesService;

@@ -4,28 +4,30 @@ import React, { useEffect, useState } from "react";
 import DailyComponent from "../components/DailyComponent";
 
 import '../css/Home.css'; // Import the Home-specific styles
-// Import other components as needed
+
+interface Quote {
+  text: string;
+  author: string;
+}
 
 const Home = () => {
-  const [quote, setQuote] = useState<{ text: string; author: string } | null>(null);
-  const [author, setAuthor] = useState<string | null>(null);
+  const [quote, setQuote] = useState<Quote | null>(null);
 
   useEffect(() => {
     const fetchQuote = async () => {
-  try {
-    const res = await fetch('/.netlify/functions/FetchQuote?endpoint=today');
-    const data = await res.json();
+      try {
+        const res = await fetch('/.netlify/functions/FetchQuote?endpoint=today');
+        const data = await res.json();
 
-    if (!data || !data.q || !data.a) {
-      throw new Error('No data received');
-    }
+        if (!data || !data.q || !data.a) {
+          throw new Error('No data received');
+        }
 
-    setQuote({ text: data.q, author: data.a });
-  } catch (err) {
-    console.error('Error fetching the quote of the day:', err);
-  }
-};
-
+        setQuote({ text: data.q, author: data.a });
+      } catch (err) {
+        console.error('Error fetching the quote of the day:', err);
+      }
+    };
 
     fetchQuote();
   }, []);
@@ -50,7 +52,7 @@ const Home = () => {
           <DailyComponent
             title="Quote of the Day"
             content={`"${quote.text}"`}
-            author={author || "Unknown"}
+            author={quote.author || "Unknown"}
           />
         )}
       </section>
