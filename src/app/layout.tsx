@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
 import RequestIdleCallbackPolyfill from "@/components/RequestIdleCallbackPolyfill";
+import { ReactNode } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,17 +18,60 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Of The Day!",
-  description:
-    "A simple website that beautifully displays Quote of the day, Songs of the day, Games of the day, etc. The idea is to be a website to easily find a new album, new multiplayer game or something along those lines.",
+  description: "Discover a new quote, song, game, and more—every day.",
+  keywords: ["daily content", "quote of the day", "song of the day", "game discovery", "random album", "oftheday"],
+  authors: [{ name: "Anthony Reynolds", url: "https://www.sloor.dev" }],
+  creator: "Anthony Reynolds",
+  metadataBase: new URL("https://oftheday.world"),
+  openGraph: {
+    title: "Of The Day!",
+    description: "Discover a new quote, song, game, and more—every day.",
+    url: "https://oftheday.world",
+    siteName: "Of The Day",
+    images: [
+      {
+        url: "https://oftheday.world/test.png",
+        width: 1200,
+        height: 630,
+        alt: "Of The Day - Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Of The Day!",
+    description: "Discover a new quote, song, game, and more—every day.",
+    creator: "@sloorjuice",
+    images: ["https://oftheday.world/test.png"],
+  },
+  themeColor: "#2c3f50",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Of The Day",
+              url: "https://oftheday.world",
+              description:
+                "A simple website that beautifully displays Quote of the Day, Songs of the Day, Games of the Day, etc.",
+            }),
+          }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <RequestIdleCallbackPolyfill />
         <Navbar />
