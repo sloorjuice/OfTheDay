@@ -34,18 +34,15 @@ exports.handler = async (event) => {
 
     // Get genres and pick one for the day
     const genres = await fetchGenres();
-    let selectedGenre = genres[pseudoRandom(genres.length)];
+    const selectedGenre = genres[pseudoRandom(genres.length)];
 
-    // Get primary game of the day, ensuring it's not an indie game
+    // Get primary game of the day
     let games = await fetchGames(selectedGenre, 'genres');
-    let gameOfTheDay = games[pseudoRandom(games.length)];
-
-    while (gameOfTheDay && gameOfTheDay.genres.some((g) => g.slug === 'indie')) {
-      console.warn(`Primary game is indie, picking a different genre`);
-      selectedGenre = genres[pseudoRandom(genres.length)];
-      games = await fetchGames(selectedGenre, 'genres');
-      gameOfTheDay = games[pseudoRandom(games.length)];
+    if (!games.length) {
+      console.warn(`No games found for ${selectedGenre}, using fallback`);
+      games = await fetchGames(); // fallback
     }
+    const gameOfTheDay = games[pseudoRandom(games.length)];
 
     // Multiplayer and Indie
     const multiplayerGames = await fetchGames('multiplayer', 'tags');
