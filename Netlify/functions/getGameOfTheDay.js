@@ -4,6 +4,12 @@ exports.handler = async (event) => {
   try {
     const apiKey = process.env.RAWG_API_KEY;
 
+    if (!apiKey) {
+      throw new Error('RAWG_API_KEY is not set. Please configure the environment variable.');
+    }
+
+    console.log('RAWG_API_KEY is set. Proceeding with API calls.');
+
     // Allow overriding the date for testing or specific queries
     const inputDate = event.queryStringParameters?.date;
     const today = inputDate || new Date().toISOString().split('T')[0]; // YYYY-MM-DD

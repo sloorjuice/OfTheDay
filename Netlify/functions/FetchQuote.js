@@ -11,22 +11,27 @@ export const handler = async (event) => {
   }
 
   const endpoint = event.queryStringParameters?.endpoint || 'today';
-  const API_URL = `https://zenquotes.io/api/${endpoint}`;
+  const API_URL = process.env.ZEN_QUOTES_API_URL || `https://zenquotes.io/api/${endpoint}`;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
 
   try {
     const response = await fetch(API_URL, { signal: controller.signal });
-    clearTimeout(timeout);
-
     if (!response.ok) {
       return {
         statusCode: response.status,
-        body: JSON.stringify({ error: `API Error: ${response.status}` }),
+        body: JSON.stringify({ error: `API Error: ${response.statusText || response.status}` }),
       };
     }
 
     const data = await response.json();
+    if (!Array.isArray(data) || data.length === 0) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Unexpected API response format' }),
+      };
+    }
+
     cachedQuote = data[0]; // store result
     lastFetch = now;
 
@@ -35,10 +40,11 @@ export const handler = async (event) => {
       body: JSON.stringify(data[0]),
     };
   } catch (error) {
-    clearTimeout(timeout);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: error.message || 'Internal Server Error' }),
     };
+  } finally {
+    clearTimeout(timeout);
   }
 };
