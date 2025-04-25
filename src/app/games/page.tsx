@@ -30,20 +30,30 @@ export default function Games() {
           if (!res.ok) throw new Error("Failed to fetch game data");
           const result = await res.json();
 
-          const transform = (game: any): GameCardData => ({
-            title: game?.name || "Untitled",
-            description: `Released: ${game?.released || "Unknown"}<br/>Rating: ${game?.rating || "N/A"}`,
-            image: game?.background_image,
+          // Define a proper type for the game object
+          interface Game {
+            name: string;
+            released: string;
+            rating: number;
+            background_image: string;
+            website?: string;
+            store_link?: string;
+          }
+
+          const transform = (game: Game): GameCardData => ({
+            title: game.name || "Untitled",
+            description: `Released: ${game.released || "Unknown"}<br/>Rating: ${game.rating || "N/A"}`,
+            image: game.background_image,
             extra: (
               <>
-                {game?.website ? (
+                {game.website ? (
                   <a href={game.website} target="_blank" rel="noopener noreferrer">
                     Visit Game Site
                   </a>
                 ) : (
                   "No site available"
                 )}
-                {game?.store_link && (
+                {game.store_link && (
                   <a
                     href={game.store_link}
                     target="_blank"
