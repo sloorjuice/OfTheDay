@@ -4,14 +4,6 @@ import { useEffect, useState, JSX } from "react";
 import DailyCard from "../../components/DailyCard";
 import SkeletonCard from "../../components/SkeletonCard";
 
-interface RawGameData {
-  name: string;
-  released?: string;
-  rating?: number;
-  background_image?: string;
-  website?: string;
-}
-
 interface GameCardData {
   title: string;
   description: string;
@@ -38,13 +30,31 @@ export default function Games() {
           if (!res.ok) throw new Error("Failed to fetch game data");
           const result = await res.json();
 
-          const transform = (game: RawGameData): GameCardData => ({
+          const transform = (game: any): GameCardData => ({
             title: game?.name || "Untitled",
             description: `Released: ${game?.released || "Unknown"}<br/>Rating: ${game?.rating || "N/A"}`,
             image: game?.background_image,
-            extra: game?.website ? (
-              <a href={game.website} target="_blank" rel="noopener noreferrer">Visit Game Site</a>
-            ) : "No site available",
+            extra: (
+              <>
+                {game?.website ? (
+                  <a href={game.website} target="_blank" rel="noopener noreferrer">
+                    Visit Game Site
+                  </a>
+                ) : (
+                  "No site available"
+                )}
+                {game?.store_link && (
+                  <a
+                    href={game.store_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block mt-2 text-blue-500 hover:underline"
+                  >
+                    Play This Game
+                  </a>
+                )}
+              </>
+            ),
           });
 
           setData({

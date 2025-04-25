@@ -4,12 +4,6 @@ exports.handler = async (event) => {
   try {
     const apiKey = process.env.RAWG_API_KEY;
 
-    if (!apiKey) {
-      throw new Error('RAWG_API_KEY is not set. Please configure the environment variable.');
-    }
-
-    console.log('RAWG_API_KEY is set. Proceeding with API calls.');
-
     // Allow overriding the date for testing or specific queries
     const inputDate = event.queryStringParameters?.date;
     const today = inputDate || new Date().toISOString().split('T')[0]; // YYYY-MM-DD
@@ -25,7 +19,7 @@ exports.handler = async (event) => {
       const res = await fetch(`https://api.rawg.io/api/genres?key=${apiKey}`);
       if (!res.ok) throw new Error(`Failed to fetch genres: ${res.status}`);
       const data = await res.json();
-      return data.results.map((g) => g.slug).filter((genre) => genre !== 'indie'); // Exclude "indie"
+      return data.results.map((g) => g.slug);
     };
 
     // Fetch games, optionally by genre or tag
