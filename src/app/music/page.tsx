@@ -4,20 +4,20 @@ import { useEffect, useState, JSX } from 'react';
 import DailyCard from '../../components/DailyCard';
 import SkeletonCard from '../../components/SkeletonCard';
 
+interface CardData {
+  title: string;
+  description: string;
+  image?: string;
+  extra: JSX.Element;
+}
+
+interface MusicData {
+  songOfTheDay: CardData | null;
+  albumOfTheDay: CardData | null;
+  artistOfTheDay: CardData | null;
+}
+
 function Music() {
-  interface MusicData {
-    songOfTheDay: CardData | null;
-    albumOfTheDay: CardData | null;
-    artistOfTheDay: CardData | null;
-  }
-
-  interface CardData {
-    title: string;
-    description: string;
-    image: string | undefined;
-    extra: JSX.Element;
-  }
-
   const [data, setData] = useState<MusicData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -91,7 +91,7 @@ function Music() {
   );
 }
 
-function Section({ title, content, type }: { title: string; content: any; type: string }) {
+function Section({ title, content, type }: { title: string; content: CardData | null; type: string }) {
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-4 border-b-2 border-[#3498db] pb-[2px]">{title}</h2>

@@ -7,7 +7,7 @@ import SkeletonCard from "../../components/SkeletonCard";
 interface GameCardData {
   title: string;
   description: string;
-  image: string | undefined;
+  image?: string;
   extra: JSX.Element | string;
 }
 
