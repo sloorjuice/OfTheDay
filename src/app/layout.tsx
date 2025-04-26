@@ -9,11 +9,13 @@ import { ReactNode } from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Of The Day",
     images: [
       {
-        url: "https://oftheday.world/test.png",
+        url: "https://oftheday.world/cover.png",
         width: 1200,
         height: 630,
         alt: "Of The Day - Preview",
@@ -44,9 +46,17 @@ export const metadata: Metadata = {
     title: "Of The Day!",
     description: "Discover a new quote, song, game, and more—every day.",
     creator: "@sloorjuice",
-    images: ["https://oftheday.world/test.png"],
+    images: ["https://oftheday.world/cover.png"],
   },
   themeColor: "#2c3f50",
+};
+
+const jsonLdData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Of The Day",
+  url: "https://oftheday.world",
+  description: "A simple website that beautifully displays Quote of the Day, Songs of the Day, Games of the Day, etc.",
 };
 
 export default function RootLayout({
@@ -60,19 +70,10 @@ export default function RootLayout({
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "Of The Day",
-              url: "https://oftheday.world",
-              description:
-                "A simple website that beautifully displays Quote of the Day, Songs of the Day, Games of the Day, etc.",
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
         <RequestIdleCallbackPolyfill />
         <Navbar />
         <main className="pt-16">{children}</main>
