@@ -67,7 +67,7 @@ export const handler = async (event) => {
             { url: artist.picture_medium }
           ]
         }
-      }),
+      }, null, 2), // Pretty print JSON
     };
   } catch (err) {
     console.error("💥 Deezer function failed:", err);

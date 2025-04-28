@@ -1,20 +1,25 @@
 const fetch = require('node-fetch');
 
+// Hash function to generate a stable pseudo-random seed from a string (the date)
+const hashString = (str) => {
+  let hash = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    hash ^= str.charCodeAt(i);
+    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+  }
+  return hash >>> 0; // Ensure unsigned
+};
+
 exports.handler = async (event) => {
   try {
     const apiKey = process.env.RAWG_API_KEY;
-
-    // Allow overriding the date for testing or specific queries
     const inputDate = event.queryStringParameters?.date;
     const today = inputDate || new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
-    // Deterministic pseudo-random seed based on day of year
-    const dayOfYear = Math.floor(
-      (new Date(today) - new Date(today.split('-')[0], 0, 0)) / (1000 * 60 * 60 * 24)
-    );
-    const pseudoRandom = (range) => dayOfYear % range;
+    const seed = hashString(today);
+    const pseudoRandom = (range, offset = 0) => (seed + offset) % range;
 
-    // Fetch genre list
+    // Fetch genres
     const fetchGenres = async () => {
       const res = await fetch(`https://api.rawg.io/api/genres?key=${apiKey}`);
       if (!res.ok) throw new Error(`Failed to fetch genres: ${res.status}`);
@@ -22,7 +27,7 @@ exports.handler = async (event) => {
       return data.results.map((g) => g.slug);
     };
 
-    // Fetch games, optionally by genre or tag
+    // Fetch games (by genre or tag)
     const fetchGames = async (value = '', type = 'genres') => {
       const filter = value ? `&${type}=${value}` : '';
       const url = `https://api.rawg.io/api/games?key=${apiKey}&dates=2000-01-01,${today}&ordering=-rating&page_size=50${filter}`;
@@ -32,24 +37,25 @@ exports.handler = async (event) => {
       return data.results || [];
     };
 
-    // Get genres and pick one for the day
+    // Get genres and pick one deterministically
     const genres = await fetchGenres();
-    const selectedGenre = genres[pseudoRandom(genres.length)];
+    const selectedGenre = genres.length ? genres[pseudoRandom(genres.length, 0)] : '';
 
-    // Get primary game of the day
+    // Primary game of the day
     let games = await fetchGames(selectedGenre, 'genres');
     if (!games.length) {
       console.warn(`No games found for ${selectedGenre}, using fallback`);
-      games = await fetchGames(); // fallback
+      games = await fetchGames();
     }
-    const gameOfTheDay = games[pseudoRandom(games.length)];
+    const gameOfTheDay = games.length ? games[pseudoRandom(games.length, 10)] : null;
 
-    // Multiplayer and Indie
+    // Multiplayer game
     const multiplayerGames = await fetchGames('multiplayer', 'tags');
-    const indieGames = await fetchGames('indie', 'genres');
+    const multiplayerGame = multiplayerGames.length ? multiplayerGames[pseudoRandom(multiplayerGames.length, 20)] : null;
 
-    const multiplayerGame = multiplayerGames[pseudoRandom(multiplayerGames.length)] || null;
-    const indieGame = indieGames[pseudoRandom(indieGames.length)] || null;
+    // Indie game
+    const indieGames = await fetchGames('indie', 'genres');
+    const indieGame = indieGames.length ? indieGames[pseudoRandom(indieGames.length, 30)] : null;
 
     return {
       statusCode: 200,
@@ -59,7 +65,7 @@ exports.handler = async (event) => {
         gameOfTheDay,
         multiplayerGameOfTheDay: multiplayerGame,
         indieGameOfTheDay: indieGame,
-      }),
+      }, null, 2), // Pretty print JSON
     };
   } catch (err) {
     console.error('Game fetch failed:', err.message);
