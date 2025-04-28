@@ -30,7 +30,16 @@ export default function Movies() {
           if (!res.ok) throw new Error("Failed to fetch movie data");
           const result = await res.json();
 
-          const transform = (movie: any): MovieCardData => ({
+          interface MovieApiResponse {
+            title: string;
+            overview: string;
+            releaseDate: string;
+            rating: number;
+            posterUrl?: string;
+            tmdbUrl: string;
+          }
+          
+          const transform = (movie: MovieApiResponse): MovieCardData => ({          
             title: movie.title || "Untitled",
             description: `
               Released: ${movie.releaseDate || "Unknown"}<br/>
