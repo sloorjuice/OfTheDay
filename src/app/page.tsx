@@ -8,8 +8,16 @@ interface Quote {
   author: string;
 }
 
+interface Word {
+  word: string;
+  definition: string;
+  partOfSpeech: string;
+  examples: string[];
+}
+
 const Home = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
+  const [wordData, setWordData] = useState<Word | null>(null);
 
   useEffect(() => {
     const fetchQuote = async () => {
@@ -18,7 +26,7 @@ const Home = () => {
         const data = await res.json();
 
         if (!data || !data.q || !data.a) {
-          throw new Error('No data received');
+          throw new Error('No quote data received');
         }
 
         setQuote({ text: data.q, author: data.a });
@@ -27,7 +35,23 @@ const Home = () => {
       }
     };
 
+    const fetchWord = async () => {
+      try {
+        const res = await fetch('/.netlify/functions/getWordOfTheDay');
+        const data = await res.json();
+
+        if (!data || !data.word || !data.definition) {
+          throw new Error('No word data received');
+        }
+
+        setWordData(data);
+      } catch (err) {
+        console.error('Error fetching the word of the day:', err);
+      }
+    };
+
     fetchQuote();
+    fetchWord();
   }, []);
 
   return (
@@ -51,6 +75,16 @@ const Home = () => {
             title="Quote of the Day"
             content={`"${quote.text}"`}
             author={quote.author || "Unknown"}
+          />
+        )}
+
+        {/* Word of the Day */}
+        {wordData && (
+          <DailyComponent
+            title={`Word of the Day (${wordData.partOfSpeech})`}
+            content={`${wordData.word}: ${wordData.definition}${
+              wordData.examples?.length > 0 ? `\n\nExample: "${wordData.examples[0]}"` : ''
+            }`}
           />
         )}
       </section>
