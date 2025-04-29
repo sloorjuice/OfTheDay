@@ -18,6 +18,20 @@ interface TvData {
   comedyOfTheDay: TvCardData | null;
 }
 
+interface TvApiResponse {
+  title?: string;
+  name?: string;
+  firstAirDate?: string;
+  first_air_date?: string;
+  rating?: number;
+  vote_average?: number;
+  posterUrl?: string;
+  poster_path?: string;
+  imageUrl?: string;
+  tmdbUrl?: string;
+  malUrl?: string;
+}
+
 export default function TV() {
   const [data, setData] = useState<TvData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -31,22 +45,37 @@ export default function TV() {
           if (!res.ok) throw new Error("Failed to fetch TV data");
           const result = await res.json();
 
-          const transform = (item: any): TvCardData => ({
-            title: item.title || "Untitled",
-            description: `First Air Date: ${item.firstAirDate || "Unknown"}<br/>Rating: ${item.rating || "N/A"}`,
-            image: item.posterUrl || item.imageUrl,
+          const transform = (item: TvApiResponse): TvCardData => ({
+            title: item.title || item.name || "Untitled",
+            description: `First Air Date: ${
+              item.firstAirDate || item.first_air_date || "Unknown"
+            }<br/>Rating: ${item.rating || item.vote_average || "N/A"}`,
+            image: item.posterUrl || item.poster_path || item.imageUrl,
             extra: (
-              <a href={item.tmdbUrl || item.malUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">
+              <a
+                href={item.tmdbUrl || item.malUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 underline"
+              >
                 View More
               </a>
             ),
           });
 
           setData({
-            tvShowOfTheDay: result.tvShowOfTheDay ? transform(result.tvShowOfTheDay) : null,
-            animeOfTheDay: result.animeOfTheDay ? transform(result.animeOfTheDay) : null,
-            dramaOfTheDay: result.dramaOfTheDay ? transform(result.dramaOfTheDay) : null,
-            comedyOfTheDay: result.comedyOfTheDay ? transform(result.comedyOfTheDay) : null,
+            tvShowOfTheDay: result.tvShowOfTheDay
+              ? transform(result.tvShowOfTheDay)
+              : null,
+            animeOfTheDay: result.animeOfTheDay
+              ? transform(result.animeOfTheDay)
+              : null,
+            dramaOfTheDay: result.dramaOfTheDay
+              ? transform(result.dramaOfTheDay)
+              : null,
+            comedyOfTheDay: result.comedyOfTheDay
+              ? transform(result.comedyOfTheDay)
+              : null,
           });
 
           setLoading(false);
