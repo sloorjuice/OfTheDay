@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Geist, Geist_Mono } from "next/font/google";
+import { BuyMeACoffee } from "@/components/BuyMeACoffee";
 import "../styles/globals.css";
 import RequestIdleCallbackPolyfill from "@/components/RequestIdleCallbackPolyfill";
 import { ReactNode } from "react";
@@ -78,6 +79,7 @@ export default function RootLayout({
         <Navbar />
         <main className="pt-16">{children}</main>
         <Footer />
+        <BuyMeACoffee />
       </body>
     </html>
   );
