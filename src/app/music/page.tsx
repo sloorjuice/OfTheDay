@@ -73,7 +73,7 @@ function Music() {
           <SkeletonCard />
         </div>
         <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
-          Every day at OfTheDay.world, we randomly feature a fresh new song, album, and artist for you to discover. Whether you're hunting for new jams or just want some daily music inspiration, this is the place to be. Check back daily for something new!
+          Every day at OfTheDay.world, we randomly feature a fresh new song, album, and artist for you to discover. Whether you&apos;re hunting for new jams or just want some daily music inspiration, this is the place to be. Check back daily for something new!
         </p>
         <section className="mt-6 flex flex-col items-center">
           <p className="text-gray-600 mb-2">
@@ -100,7 +100,7 @@ function Music() {
         <Section title="Artist of the Day" content={data.artistOfTheDay} type="artist" />
       </div>
       <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
-        Every day at OfTheDay.world, we randomly feature a fresh new song, album, and artist for you to discover. Whether you're hunting for new jams or just want some daily music inspiration, this is the place to be. Check back daily for something new!
+        Every day at OfTheDay.world, we randomly feature a fresh new song, album, and artist for you to discover. Whether you&apos;re hunting for new jams or just want some daily music inspiration, this is the place to be. Check back daily for something new!
       </p>
       <section className="mt-6 flex flex-col items-center">
         <p className="text-gray-600 mb-2">

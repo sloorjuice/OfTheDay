@@ -95,7 +95,7 @@ export default function Games() {
         </div>
         <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
           Every day at OfTheDay.world, we feature a selection of randomly selected games for you to discover. 
-          Whether you're up late looking for a new game to play with your friends or some random indie gem to explore,
+          Whether you&apos;re up late looking for a new game to play with your friends or some random indie gem to explore,
           this is the place to be. Check back daily for something new!
         </p>
         <section className="mt-6 flex flex-col items-center">
@@ -124,7 +124,7 @@ export default function Games() {
       </div>
       <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
         Every day at OfTheDay.world, we feature a selection of randomly selected games for you to discover. 
-        Whether you're up late looking for a new game to play with your friends or some random indie gem to explore,
+        Whether you&apos;re up late looking for a new game to play with your friends or some random indie gem to explore,
         this is the place to be. Check back daily for something new!
       </p>
       <section className="mt-6 flex flex-col items-center">

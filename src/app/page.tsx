@@ -90,7 +90,7 @@ const Home = () => {
       </section>
 
       <section className="mt-6 max-w-2xl text-center text-gray-500">
-        <p>At OfTheDay.World, we deliver randomized quotes, music, games, movies, and words daily to inspire, entertain, and enrich your day. Whether you're looking for a new album to listen to, an old horror movie you've never seen, a motivational quote, or a fun new game to play, our daily selections help you discover something fresh every day. Bookmark us and make discovering your next favorite thing a daily habit!</p>
+        <p>At OfTheDay.World, we deliver randomized quotes, music, games, movies, and words daily to inspire, entertain, and enrich your day. Whether you&apos;re looking for a new album to listen to, an old horror movie you&apos;ve never seen, a motivational quote, or a fun new game to play, our daily selections help you discover something fresh every day. Bookmark us and make discovering your next favorite thing a daily habit!</p>
       </section>
 
       <section className="mt-6 flex flex-col items-center">
