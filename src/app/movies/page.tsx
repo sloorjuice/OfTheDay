@@ -84,6 +84,18 @@ export default function Movies() {
           <SkeletonCard />
           <SkeletonCard />
         </div>
+        <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
+          Every day at OfTheDay.world, we randomly feature a fresh new movies for you to discover. Whether you're dying for a new horror movie, some awesome animated movie for the family or even just want something funny in the background, this is the place to be. Check back daily for something new!
+        </p>
+        <section className="mt-6 flex flex-col items-center">
+          <p className="text-gray-600 mb-2">
+            Explore our daily picks:
+          </p>
+          <ul className="flex justify-center">
+            <li><a href="/music" className="text-blue-500 hover:underline mx-2">Music</a></li>
+            <li><a href="/games" className="text-blue-500 hover:underline mx-2">Games</a></li>
+          </ul>
+        </section>
       </main>
     );
   }
@@ -99,6 +111,18 @@ export default function Movies() {
         <MovieSection title="Animated Movie of the Day" content={data.animatedMovieOfTheDay} type="animated" />
         <MovieSection title="Horror Movie of the Day" content={data.horrorMovieOfTheDay} type="horror" />
       </div>
+      <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
+        Every day at OfTheDay.world, we randomly feature a fresh new movies for you to discover. Whether you're dying for a new horror movie, some awesome animated movie for the family or even just want something funny in the background, this is the place to be. Check back daily for something new!
+      </p>
+      <section className="mt-6 flex flex-col items-center">
+        <p className="text-gray-600 mb-2">
+          Explore our daily picks:
+        </p>
+        <ul className="flex justify-center">
+          <li><a href="/music" className="text-blue-500 hover:underline mx-2">Music</a></li>
+          <li><a href="/games" className="text-blue-500 hover:underline mx-2">Games</a></li>
+        </ul>
+      </section>
     </main>
   );
 }

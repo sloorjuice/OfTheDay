@@ -93,6 +93,20 @@ export default function Games() {
           <SkeletonCard />
           <SkeletonCard />
         </div>
+        <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
+          Every day at OfTheDay.world, we feature a selection of randomly selected games for you to discover. 
+          Whether you're up late looking for a new game to play with your friends or some random indie gem to explore,
+          this is the place to be. Check back daily for something new!
+        </p>
+        <section className="mt-6 flex flex-col items-center">
+          <p className="text-gray-600 mb-2">
+            Explore our daily picks:
+          </p>
+          <ul className="flex justify-center">
+            <li><a href="/music" className="text-blue-500 hover:underline mx-2">Music</a></li>
+            <li><a href="/movies" className="text-blue-500 hover:underline mx-2">Movies</a></li>
+          </ul>
+        </section>
       </main>
     );
   }
@@ -108,6 +122,20 @@ export default function Games() {
         <GameSection title="Multiplayer Pick" content={data.multiplayerGameOfTheDay} type="multiplayer" />
         <GameSection title="Indie Highlight" content={data.indieGameOfTheDay} type="indie" />
       </div>
+      <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
+        Every day at OfTheDay.world, we feature a selection of randomly selected games for you to discover. 
+        Whether you're up late looking for a new game to play with your friends or some random indie gem to explore,
+        this is the place to be. Check back daily for something new!
+      </p>
+      <section className="mt-6 flex flex-col items-center">
+        <p className="text-gray-600 mb-2">
+          Explore our daily picks:
+        </p>
+        <ul className="flex justify-center">
+          <li><a href="/music" className="text-blue-500 hover:underline mx-2">Music</a></li>
+          <li><a href="/movies" className="text-blue-500 hover:underline mx-2">Movies</a></li>
+        </ul>
+      </section>
     </main>
   );
 }

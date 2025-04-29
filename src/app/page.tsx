@@ -88,6 +88,21 @@ const Home = () => {
           />
         )}
       </section>
+
+      <section className="mt-6 max-w-2xl text-center text-gray-500">
+        <p>At OfTheDay.World, we deliver randomized quotes, music, games, movies, and words daily to inspire, entertain, and enrich your day. Whether you're looking for a new album to listen to, an old horror movie you've never seen, a motivational quote, or a fun new game to play, our daily selections help you discover something fresh every day. Bookmark us and make discovering your next favorite thing a daily habit!</p>
+      </section>
+
+      <section className="mt-6 flex flex-col items-center">
+        <p className="text-gray-600 mb-2">
+          Explore our daily picks:
+        </p>
+        <ul className="flex justify-center">
+          <li><a href="/music" className="text-blue-500 hover:underline mx-2">Music</a></li>
+          <li><a href="/games" className="text-blue-500 hover:underline mx-2">Games</a></li>
+          <li><a href="/movies" className="text-blue-500 hover:underline mx-2">Movies</a></li>
+        </ul>
+      </section>
     </div>
   );
 };

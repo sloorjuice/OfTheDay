@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Of The Day!",
-  description: "Discover a new quote, song, game, and more—every day.",
+  title: "OfTheDay.world | Daily Quotes, Songs, Games, Movies & More",
+  description: "Discover a new quote, song, game, movie, and word every day on OfTheDay.world. Get inspired daily with curated recommendations and fresh content!",
   keywords: ["daily content", "Daily Games", "Daily songs", "Daily Music", "quote of the day", "song of the day", "game discovery", "random album", "oftheday", "movies", "music", "games", "daily inspiration"],
   authors: [{ name: "Anthony Reynolds", url: "https://www.sloor.dev" }],
   creator: "Anthony Reynolds",

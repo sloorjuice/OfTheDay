@@ -72,6 +72,18 @@ function Music() {
           <SkeletonCard />
           <SkeletonCard />
         </div>
+        <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
+          Every day at OfTheDay.world, we randomly feature a fresh new song, album, and artist for you to discover. Whether you're hunting for new jams or just want some daily music inspiration, this is the place to be. Check back daily for something new!
+        </p>
+        <section className="mt-6 flex flex-col items-center">
+          <p className="text-gray-600 mb-2">
+            Explore our daily picks:
+          </p>
+          <ul className="flex justify-center">
+            <li><a href="/games" className="text-blue-500 hover:underline mx-2">Games</a></li>
+            <li><a href="/movies" className="text-blue-500 hover:underline mx-2">Movies</a></li>
+          </ul>
+        </section>
       </main>
     );
   }
@@ -87,6 +99,18 @@ function Music() {
         <Section title="Album of the Day" content={data.albumOfTheDay} type="album" />
         <Section title="Artist of the Day" content={data.artistOfTheDay} type="artist" />
       </div>
+      <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
+        Every day at OfTheDay.world, we randomly feature a fresh new song, album, and artist for you to discover. Whether you're hunting for new jams or just want some daily music inspiration, this is the place to be. Check back daily for something new!
+      </p>
+      <section className="mt-6 flex flex-col items-center">
+        <p className="text-gray-600 mb-2">
+          Explore our daily picks:
+        </p>
+        <ul className="flex justify-center">
+          <li><a href="/games" className="text-blue-500 hover:underline mx-2">Games</a></li>
+          <li><a href="/movies" className="text-blue-500 hover:underline mx-2">Movies</a></li>
+        </ul>
+      </section>
     </main>
   );
 }
