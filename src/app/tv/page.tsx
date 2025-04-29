@@ -97,7 +97,6 @@ export default function TV() {
           <SkeletonCard />
           <SkeletonCard />
           <SkeletonCard />
-          <SkeletonCard />
         </div>
         <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
           Every day at OfTheDay.world, we feature a random TV show, anime, drama, and comedy for you to explore.
