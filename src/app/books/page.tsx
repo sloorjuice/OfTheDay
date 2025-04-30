@@ -74,7 +74,7 @@ export default function Books() {
       )}
 
       <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
-        Every day we highlight one book you might love. Whether it's fiction, nonfiction, or a total wildcard, this daily pick is chosen at random and changes every 24 hours. Discover something new to read today!
+        Every day we highlight one book you might love. Whether it&rsquo;s fiction, nonfiction, or a total wildcard, this daily pick is chosen at random and changes every 24 hours. Discover something new to read today!
       </p>
 
       <section className="mt-6 flex flex-col items-center">
