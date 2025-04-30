@@ -2,10 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import DailyComponent from "../components/DailyComponent";
+import JokeComponent from "../components/JokeComponent";
+
 
 interface Quote {
   text: string;
   author: string;
+}
+
+interface Joke {
+  setup: string;
+  delivery: string;
+  category: string;
 }
 
 interface Word {
@@ -18,6 +26,7 @@ interface Word {
 const Home = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [wordData, setWordData] = useState<Word | null>(null);
+  const [joke, setJoke] = useState<Joke | null>(null);
 
   useEffect(() => {
     const fetchQuote = async () => {
@@ -50,8 +59,21 @@ const Home = () => {
       }
     };
 
+    const fetchJoke = async () => {
+      try {
+        const res = await fetch('/.netlify/functions/getJokeOfTheDay');
+        const data = await res.json();
+        if (!data || !data.joke) throw new Error("No joke data");
+        const [setup, delivery] = data.joke.split(" ... ");
+        setJoke({ setup, delivery, category: data.category });
+      } catch (err) {
+        console.error("Error fetching joke of the day:", err);
+      }
+    }
+
     fetchQuote();
     fetchWord();
+    fetchJoke();
   }, []);
 
   return (
@@ -75,6 +97,15 @@ const Home = () => {
             title="Quote of the Day"
             content={`"${quote.text}"`}
             author={quote.author || "Unknown"}
+          />
+        )}
+
+        {/* Joke of the Day */}
+        {joke && (
+          <JokeComponent
+            setup={joke.setup}
+            punchline={joke.delivery}
+            category={joke.category}
           />
         )}
 
