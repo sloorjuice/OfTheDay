@@ -79,7 +79,7 @@ export default function RootLayout({
         <RequestIdleCallbackPolyfill />
         <GradientBackground>
           <Navbar />
-          <main className="pt-16">{children}</main>
+          <main className="pt-16 pb-12">{children}</main> {/* Added pb-12 */}
           <Footer />
           <BuyMeACoffee />
         </GradientBackground>
