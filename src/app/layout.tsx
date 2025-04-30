@@ -38,8 +38,8 @@ export default function RootLayout({
   }, []);
 
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => isMobile && setMenuOpen(false),
-    onSwipedRight: () => isMobile && setMenuOpen(true),
+    onSwipedLeft: () => isMobile && setMenuOpen(true),
+    onSwipedRight: () => isMobile && setMenuOpen(false),
     preventScrollOnSwipe: true,
     trackMouse: true,
   });
