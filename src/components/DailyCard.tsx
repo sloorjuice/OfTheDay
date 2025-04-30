@@ -1,6 +1,5 @@
 import React, { JSX, useEffect, useState } from "react";
 import Image from "next/image";
-import html2canvas from "html2canvas";
 
 interface DailyCardProps {
   type?: string;
