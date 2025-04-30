@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 const date_link = "https://www.google.com/search?q=today's+date";
@@ -94,7 +93,7 @@ export default function Navbar({
         <ul
           className={`
             ${menuOpen ? "right-0" : "right-[-100%]"}
-            2xl:static 2xl:flex 2xl:flex-row 2xl:space-x-3 2xl:bg-transparent
+            2xl:static 2xl:flex 2xl:space-x-3 2xl:bg-transparent
             fixed top-0 h-screen 2xl:h-auto bg-[#2c3e50] w-[250px] 2xl:w-auto flex flex-col 2xl:flex-row justify-start 2xl:justify-end items-center 2xl:items-center gap-y-4 pt-24 2xl:pt-0 px-4 transition-all duration-300 z-[1000]
           `}
         >
