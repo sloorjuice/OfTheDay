@@ -6,8 +6,13 @@ import { usePathname } from "next/navigation";
 
 const date_link = "https://www.google.com/search?q=today's+date";
 
-export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Navbar({
+  menuOpen,
+  setMenuOpen,
+}: {
+  menuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const pathname = usePathname();
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);

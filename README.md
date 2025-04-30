@@ -33,10 +33,10 @@ It uses date-based deterministic seeding to ensure every user sees the same cont
 
 ### As a Bonus
 
-- Visit somethingtoday.netlify.app/.netlify/functions/getSongOfTheDay for a raw jason of the music of the day
-- Visit somethingtoday.netlify.app/.netlify/functions/getMovieOfTheDay for a raw jason of the movies of the day
-- Visit somethingtoday.netlify.app/.netlify/functions/getTvOfTheDay for a raw jason of the tv of the day
-- Visit somethingtoday.netlify.app/.netlify/functions/getGameOfTheDay for a raw jason of the games of the day
+- Visit https://somethingtoday.netlify.app/.netlify/functions/getSongOfTheDay for a raw jason of the music of the day
+- Visit https://somethingtoday.netlify.app/.netlify/functions/getMovieOfTheDay for a raw jason of the movies of the day
+- Visit https://somethingtoday.netlify.app/.netlify/functions/getTvOfTheDay for a raw jason of the tv of the day
+- Visit https://somethingtoday.netlify.app/.netlify/functions/getGameOfTheDay for a raw jason of the games of the day
 
 It would be cool to see someone use this in their own project.
 
