@@ -6,7 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { BuyMeACoffee } from "@/components/BuyMeACoffee";
 import "../styles/globals.css";
 import RequestIdleCallbackPolyfill from "@/components/RequestIdleCallbackPolyfill";
-import { ReactNode, useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import GradientBackground from "@/components/GradientBackground";
 import { useSwipeable } from "react-swipeable";
 
@@ -38,8 +38,8 @@ export default function RootLayout({
   }, []);
 
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => isMobile && setMenuOpen(false),
-    onSwipedRight: () => isMobile && setMenuOpen(true),
+    onSwipedLeft: () => isMobile && setMenuOpen(true),
+    onSwipedRight: () => isMobile && setMenuOpen(false),
     preventScrollOnSwipe: true,
     trackMouse: true,
   });
