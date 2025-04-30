@@ -28,7 +28,7 @@ const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
       navigator
         .share({
           title: data.title,
-          text: data.description.replace(/<[^>]+>/g, ""),
+          text: `Check out "${data.title}" on OfTheDay! ${data.description.replace(/<[^>]+>/g, "")}`,
           url: window.location.href,
         })
         .catch((err) => console.error("Sharing failed:", err));
