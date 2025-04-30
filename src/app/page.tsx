@@ -55,7 +55,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col items-center px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white min-h-screen">
       <h1 className="pt-6 py-2 text-3xl sm:text-4xl font-bold text-center">
         Welcome to{" "}
         <span className="relative inline-block pb-1 border-b-4 border-blue-500 transition-colors duration-300 hover:text-blue-500">
@@ -64,7 +64,7 @@ const Home = () => {
         </span>
         !
       </h1>
-      <h2 className="text-base sm:text-lg text-center mt-2">
+      <h2 className="text-base sm:text-lg text-center mt-2 text-gray-300">
         Discover something new every day.
       </h2>
 
@@ -89,18 +89,20 @@ const Home = () => {
         )}
       </section>
 
-      <section className="mt-6 max-w-2xl text-center text-gray-500">
-        <p>At OfTheDay.World, we deliver randomized quotes, music, games, movies, and words daily to inspire, entertain, and enrich your day. Whether you&apos;re looking for a new album to listen to, an old horror movie you&apos;ve never seen, a motivational quote, or a fun new game to play, our daily selections help you discover something fresh every day. Bookmark us and make discovering your next favorite thing a daily habit!</p>
+      <section className="mt-6 max-w-2xl text-center text-gray-400">
+        <p>
+          At OfTheDay.World, we deliver randomized quotes, music, games, movies, and words daily to inspire, entertain, and enrich your day. Whether you&apos;re looking for a new album to listen to, an old horror movie you&apos;ve never seen, a motivational quote, or a fun new game to play, our daily selections help you discover something fresh every day. Bookmark us and make discovering your next favorite thing a daily habit!
+        </p>
       </section>
 
       <section className="mt-6 flex flex-col items-center">
-        <p className="text-gray-600 mb-2">
+        <p className="text-gray-400 mb-2">
           Explore our daily picks:
         </p>
         <ul className="flex justify-center">
-          <li><a href="/music" className="text-blue-500 hover:underline mx-2">Music</a></li>
-          <li><a href="/games" className="text-blue-500 hover:underline mx-2">Games</a></li>
-          <li><a href="/movies" className="text-blue-500 hover:underline mx-2">Movies</a></li>
+          <li><a href="/music" className="text-blue-400 hover:underline mx-2">Music</a></li>
+          <li><a href="/games" className="text-blue-400 hover:underline mx-2">Games</a></li>
+          <li><a href="/movies" className="text-blue-400 hover:underline mx-2">Movies</a></li>
         </ul>
       </section>
     </div>

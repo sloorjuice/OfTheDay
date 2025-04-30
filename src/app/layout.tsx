@@ -6,6 +6,7 @@ import { BuyMeACoffee } from "@/components/BuyMeACoffee";
 import "../styles/globals.css";
 import RequestIdleCallbackPolyfill from "@/components/RequestIdleCallbackPolyfill";
 import { ReactNode } from "react";
+import GradientBackground from "@/components/GradientBackground"; // 🔥 NEW
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,10 +77,12 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
         <RequestIdleCallbackPolyfill />
-        <Navbar />
-        <main className="pt-16">{children}</main>
-        <Footer />
-        <BuyMeACoffee />
+        <GradientBackground>
+          <Navbar />
+          <main className="pt-16">{children}</main>
+          <Footer />
+          <BuyMeACoffee />
+        </GradientBackground>
       </body>
     </html>
   );
