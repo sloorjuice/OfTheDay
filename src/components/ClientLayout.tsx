@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Geist, Geist_Mono } from "next/font/google";
 import { BuyMeACoffee } from "@/components/BuyMeACoffee";
 import RequestIdleCallbackPolyfill from "@/components/RequestIdleCallbackPolyfill";
 import GradientBackground from "@/components/GradientBackground";
