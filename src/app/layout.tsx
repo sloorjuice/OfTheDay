@@ -1,5 +1,5 @@
-"use client";
-
+import type { Metadata } from "next";
+import { metadata as sharedMetadata } from "./metadata"; // ✅ Import your metadata
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -9,6 +9,8 @@ import RequestIdleCallbackPolyfill from "@/components/RequestIdleCallbackPolyfil
 import { useState, useEffect } from "react";
 import GradientBackground from "@/components/GradientBackground";
 import { useSwipeable } from "react-swipeable";
+
+export const metadata: Metadata = sharedMetadata; // ✅ Explicit re-export
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +34,7 @@ export default function RootLayout({
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1280);
-    handleResize(); // on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -47,21 +49,20 @@ export default function RootLayout({
   const jsonLdData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Of The Day!",
-    "url": "https://oftheday.world",
-    "description":
+    name: "Of The Day!",
+    url: "https://oftheday.world",
+    description:
       "Discover a new quote, song, game, movie, and word every day on OfTheDay.world.",
-    "author": {
+    author: {
       "@type": "Person",
-      "name": "Anthony Reynolds",
-      "url": "https://www.sloor.dev",
+      name: "Anthony Reynolds",
+      url: "https://www.sloor.dev",
     },
   };
 
   return (
     <html lang="en">
       <head>
-        {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
