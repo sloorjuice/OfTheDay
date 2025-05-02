@@ -84,7 +84,7 @@ const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
           )}
         </div>
 
-        <div className="absolute left-0 bottom-0">
+        <div className="absolute left-0 -bottom-4">
           <button
             onClick={shareToSystem}
             className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700"
