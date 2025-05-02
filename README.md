@@ -12,11 +12,13 @@ GitHub: https://github.com/sloorjuice/OfTheDay
 OfTheDay is a Next.js application that delivers daily-changing content such as:
 
 - Song/Abum/Artist of the Day (from Deezer)
-- Games of the Day (from RAWG)
-- Movie/tv of the Day (from TMDb)
+- Games of the Day (From RAWG)
+- Movie/tv of the Day (From TMDb)
 - Anime of the day (From MAL)
-- Word of the Day
-- Quote of the Day
+- Book of the day (From Google Play)
+- Word of the Day (Web Scraping)
+- Quote of the Day (From ZenQuotes)
+- Joke of the Day (From JokeAPI)
 
 It uses date-based deterministic seeding to ensure every user sees the same content for a given day.
 
@@ -26,7 +28,8 @@ It uses date-based deterministic seeding to ensure every user sees the same cont
 
 - Framework: Next.js (App Router)
 - Styling: Tailwind CSS
-- APIs: Deezer, RAWG, TMDb, ZenQuotes
+- APIs: Deezer, RAWG, TMDb, ZenQuotes, GooglePlay, MAL, ZenQuotes, JokeAPI
+- Plus Some Web Scraping
 - Hosting: Netlify (with serverless functions)
 
 ---
