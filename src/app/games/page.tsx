@@ -18,12 +18,48 @@ interface PokemonData {
   extra: JSX.Element | string;
 }
 
+interface GameApiResponse {
+  name: string;
+  released: string;
+  rating: number;
+  background_image?: string;
+  website?: string;
+  store_link?: string;
+}
+
 interface GameData {
   gameOfTheDay: GameCardData | null;
   multiplayerGameOfTheDay: GameCardData | null;
   indieGameOfTheDay: GameCardData | null;
   pokemonOfTheDay: PokemonData | null;
 }
+
+const transform = (game: GameApiResponse): GameCardData => ({
+  title: game.name || "Untitled",
+  description: `Released: ${game.released || "Unknown"}<br/>Rating: ${game.rating || "N/A"}`,
+  image: game.background_image,
+  extra: (
+    <>
+      {game.website ? (
+        <a href={game.website} target="_blank" rel="noopener noreferrer">
+          Visit Game Site
+        </a>
+      ) : (
+        "No site available"
+      )}
+      {game.store_link && (
+        <a
+          href={game.store_link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block mt-2 text-blue-500 hover:underline"
+        >
+          Play This Game
+        </a>
+      )}
+    </>
+  ),
+});
 
 export default function Games() {
   const [data, setData] = useState<GameData | null>(null);
@@ -45,40 +81,13 @@ export default function Games() {
           const gamesResult = await gamesRes.json();
           const pokemon = await pokemonRes.json();
 
-          const transform = (game: any): GameCardData => ({
-            title: game.name || "Untitled",
-            description: `Released: ${game.released || "Unknown"}<br/>Rating: ${game.rating || "N/A"}`,
-            image: game.background_image,
-            extra: (
-              <>
-                {game.website ? (
-                  <a href={game.website} target="_blank" rel="noopener noreferrer">
-                    Visit Game Site
-                  </a>
-                ) : (
-                  "No site available"
-                )}
-                {game.store_link && (
-                  <a
-                    href={game.store_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block mt-2 text-blue-500 hover:underline"
-                  >
-                    Play This Game
-                  </a>
-                )}
-              </>
-            ),
-          });
-
-            const pokemonData: PokemonData = {
+          const pokemonData: PokemonData = {
             title: `#${pokemon.id} — ${pokemon.name}`,
             description: `Types: ${pokemon.types.join(", ")}<br/>` +
               pokemon.stats.map((s: { name: string; value: number }) => `${s.name}: ${s.value}`).join("<br/>"),
             image: pokemon.image,
             extra: "",
-            };
+          };
 
           setData({
             gameOfTheDay: gamesResult.gameOfTheDay ? transform(gamesResult.gameOfTheDay) : null,
