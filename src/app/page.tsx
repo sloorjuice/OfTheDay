@@ -23,6 +23,9 @@ interface Word {
   examples: string[];
 }
 
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
+
 const Home = () => {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [wordData, setWordData] = useState<Word | null>(null);
@@ -112,10 +115,10 @@ const Home = () => {
         {/* Word of the Day */}
         {wordData && (
           <DailyComponent
-            title={`Word of the Day (${wordData.partOfSpeech})`}
-            content={`${wordData.word}: ${wordData.definition}${
-              wordData.examples?.length > 0 ? `\n\nExample: "${wordData.examples[0]}"` : ''
-            }`}
+            title={`Word of the Day (${capitalize(wordData.partOfSpeech)})`}
+            content={`${capitalize(wordData.word)}: ${capitalize(wordData.definition)}.${
+              wordData.examples?.length > 0 ? `\n\nExample: "${wordData.examples[0]}"` : ''}`}
+
           />
         )}
       </section>
