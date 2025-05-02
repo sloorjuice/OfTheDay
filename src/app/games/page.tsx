@@ -45,7 +45,7 @@ const transform = (game: GameApiResponse): GameCardData => ({
           Visit Game Site
         </a>
       ) : (
-        "No site available"
+        ""
       )}
       {game.store_link && (
         <a
