@@ -131,12 +131,19 @@ export default function Games() {
   return (
     <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
       <h1 className="text-4xl font-bold mb-10">Games of the Day</h1>
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
-        <GameSection title="Game of the Day" content={data.gameOfTheDay} type="game" />
-        <GameSection title="Multiplayer Pick" content={data.multiplayerGameOfTheDay} type="multiplayer" />
-        <GameSection title="Indie Highlight" content={data.indieGameOfTheDay} type="indie" />
-        <GameSection title="Pokémon of the Day" content={data.pokemonOfTheDay} type="pokemon" />
-      </div>
+      <section>
+      <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-center max-w-7xl mx-auto">
+          <GameSection title="Game of the Day" content={data.gameOfTheDay} type="game" />
+          <GameSection title="Multiplayer Pick" content={data.multiplayerGameOfTheDay} type="multiplayer" />
+          <GameSection title="Indie Highlight" content={data.indieGameOfTheDay} type="indie" />
+        </div>
+      </section>
+      <section>
+        <h2 className="text-4xl font-bold mb-10 mt-20">Characters</h2>
+        <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-center max-w-7xl mx-auto">
+          <GameSection title="Pokémon of the Day" content={data.pokemonOfTheDay} type="pokemon" />
+        </div>
+      </section>
       <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
         Every day at OfTheDay.world, we feature a selection of games and Pokémon for you to discover.
         Whether you&apos;re hunting for a hidden gem or catching your favorite Pokémon, check back daily for a new surprise!

@@ -94,7 +94,7 @@ function Music() {
   return (
     <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
       <h1 className="text-4xl font-bold mb-10">Music of the Day</h1>
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-center max-w-7xl mx-auto">
         <Section title="Song of the Day" content={data.songOfTheDay} type="song" />
         <Section title="Album of the Day" content={data.albumOfTheDay} type="album" />
         <Section title="Artist of the Day" content={data.artistOfTheDay} type="artist" />

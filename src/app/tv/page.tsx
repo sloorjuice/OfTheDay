@@ -119,7 +119,7 @@ export default function TV() {
   return (
     <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
       <h1 className="text-4xl font-bold mb-10">TV of the Day</h1>
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
+      <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,2fr))] justify-center max-w-7xl mx-auto">
         <TvSection title="TV Show of the Day" content={data.tvShowOfTheDay} type="tv" />
         <TvSection title="Anime of the Day" content={data.animeOfTheDay} type="anime" />
         <TvSection title="Drama of the Day" content={data.dramaOfTheDay} type="drama" />

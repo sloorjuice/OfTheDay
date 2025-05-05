@@ -106,7 +106,7 @@ export default function Movies() {
   return (
     <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
       <h1 className="text-4xl font-bold mb-10">Movies of the Day</h1>
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-center max-w-7xl mx-auto">
         <MovieSection title="Movie of the Day" content={data.movieOfTheDay} type="movie" />
         <MovieSection title="Animated Movie of the Day" content={data.animatedMovieOfTheDay} type="animated" />
         <MovieSection title="Horror Movie of the Day" content={data.horrorMovieOfTheDay} type="horror" />
