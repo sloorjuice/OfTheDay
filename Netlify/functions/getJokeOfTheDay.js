@@ -17,7 +17,7 @@ exports.handler = async (event) => {
     const seed = hashString(today);
     const pseudoRandom = (range, offset = 0) => (seed + offset) % range;
 
-    const genres = ["Misc", "Programming", "Pun", "Spooky", "Christmas"];
+    const genres = ["Misc", "Programming", "Pun", "Spooky", "Christmas", "Dark"];
     const genreIndex = pseudoRandom(genres.length);
     const selectedGenre = genres[genreIndex];
 
