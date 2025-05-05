@@ -16,6 +16,15 @@ interface TvData {
   animeOfTheDay: TvCardData | null;
   dramaOfTheDay: TvCardData | null;
   comedyOfTheDay: TvCardData | null;
+  rmCharacterOfTheDay: TvCardData | null; // New property
+}
+
+interface CharacterData {
+  id: number;
+  name: string;
+  image: string;
+  species: string;
+  status: string;
 }
 
 interface TvApiResponse {
@@ -39,11 +48,18 @@ export default function TV() {
 
   useEffect(() => {
     const idle = requestIdleCallback(() => {
-      async function fetchTv() {
+      async function fetchTvAndCharacter() {
         try {
-          const res = await fetch("/.netlify/functions/getTvOfTheDay");
-          if (!res.ok) throw new Error("Failed to fetch TV data");
-          const result = await res.json();
+          const [tvRes, characterRes] = await Promise.all([
+            fetch("/.netlify/functions/getTvOfTheDay"),
+            fetch("/.netlify/functions/getRamOfTheDay"),
+          ]);
+
+          if (!tvRes.ok) throw new Error("Failed to fetch TV data");
+          if (!characterRes.ok) throw new Error("Failed to fetch character data");
+
+          const tvResult = await tvRes.json();
+          const characterResult = await characterRes.json();
 
           const transform = (item: TvApiResponse): TvCardData => ({
             title: item.title || item.name || "Untitled",
@@ -64,18 +80,33 @@ export default function TV() {
           });
 
           setData({
-            tvShowOfTheDay: result.tvShowOfTheDay
-              ? transform(result.tvShowOfTheDay)
+            tvShowOfTheDay: tvResult.tvShowOfTheDay
+              ? transform(tvResult.tvShowOfTheDay)
               : null,
-            animeOfTheDay: result.animeOfTheDay
-              ? transform(result.animeOfTheDay)
+            animeOfTheDay: tvResult.animeOfTheDay
+              ? transform(tvResult.animeOfTheDay)
               : null,
-            dramaOfTheDay: result.dramaOfTheDay
-              ? transform(result.dramaOfTheDay)
+            dramaOfTheDay: tvResult.dramaOfTheDay
+              ? transform(tvResult.dramaOfTheDay)
               : null,
-            comedyOfTheDay: result.comedyOfTheDay
-              ? transform(result.comedyOfTheDay)
+            comedyOfTheDay: tvResult.comedyOfTheDay
+              ? transform(tvResult.comedyOfTheDay)
               : null,
+            rmCharacterOfTheDay: {
+              title: characterResult.name,
+              description: `Species: ${characterResult.species}<br/>Status: ${characterResult.status}`,
+              image: characterResult.image,
+              extra: (
+                <a
+                  href={`https://rickandmortyapi.com/character/${characterResult.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 underline"
+                >
+                  View on API
+                </a>
+              ),
+            },
           });
 
           setLoading(false);
@@ -84,7 +115,7 @@ export default function TV() {
           setLoading(false);
         }
       }
-      fetchTv();
+      fetchTvAndCharacter();
     });
     return () => cancelIdleCallback(idle);
   }, []);
@@ -119,12 +150,26 @@ export default function TV() {
   return (
     <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
       <h1 className="text-4xl font-bold mb-10">TV of the Day</h1>
-      <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,2fr))] justify-center max-w-7xl mx-auto">
-        <TvSection title="TV Show of the Day" content={data.tvShowOfTheDay} type="tv" />
-        <TvSection title="Anime of the Day" content={data.animeOfTheDay} type="anime" />
-        <TvSection title="Drama of the Day" content={data.dramaOfTheDay} type="drama" />
-        <TvSection title="Comedy of the Day" content={data.comedyOfTheDay} type="comedy" />
-      </div>
+      <section>
+        <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,2fr))] justify-center max-w-7xl mx-auto">
+          <TvSection title="TV Show of the Day" content={data.tvShowOfTheDay} type="tv" />
+          <TvSection title="Anime of the Day" content={data.animeOfTheDay} type="anime" />
+          <TvSection title="Drama of the Day" content={data.dramaOfTheDay} type="drama" />
+          <TvSection title="Comedy of the Day" content={data.comedyOfTheDay} type="comedy" />
+        </div>  
+      </section>
+      <section>
+        <h2 className="text-4xl font-bold mb-10 mt-20">Characters</h2>
+        <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-center max-w-7xl mx-auto">
+          {data.rmCharacterOfTheDay && (
+            <TvSection
+              title="R&M Character of the Day"
+              content={data.rmCharacterOfTheDay}
+              type="character"
+            />
+          )}
+        </div>
+      </section>
       <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
         Every day at OfTheDay.world, we feature a random TV show, anime, drama, and comedy for you to explore.
       </p>
