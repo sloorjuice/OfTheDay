@@ -81,10 +81,15 @@ export default function Games() {
           const gamesResult = await gamesRes.json();
           const pokemon = await pokemonRes.json();
 
+          const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
           const pokemonData: PokemonData = {
-            title: `#${pokemon.id} — ${pokemon.name}`,
-            description: `Types: ${pokemon.types.join(", ")}<br/>` +
-              pokemon.stats.map((s: { name: string; value: number }) => `${s.name}: ${s.value}`).join("<br/>"),
+            title: `#${pokemon.id} — ${capitalize(pokemon.name)}`,
+            description:
+              `Types: ${pokemon.types.map(capitalize).join(", ")}<br/>` +
+              pokemon.stats
+                .map((s: { name: string; value: number }) => `${capitalize(s.name)}: ${s.value}`)
+                .join("<br/>"),
             image: pokemon.image,
             extra: "",
           };
