@@ -12,10 +12,15 @@ interface MovieCardData {
 }
 
 interface MovieData {
-  movieOfTheDay: MovieCardData | null;
-  animatedMovieOfTheDay: MovieCardData | null;
-  horrorMovieOfTheDay: MovieCardData | null;
+  [key: string]: MovieCardData | null;
 }
+
+// Map keys to titles, types, and labels for rendering
+const contentMap = [
+  { key: "movieOfTheDay", title: "Movie of the Day" },
+  { key: "animatedMovieOfTheDay", title: "Animated Movie" },
+  { key: "horrorMovieOfTheDay", title: "Horror Highlight" },
+];
 
 export default function Movies() {
   const [data, setData] = useState<MovieData | null>(null);
@@ -26,20 +31,14 @@ export default function Movies() {
     const idle = requestIdleCallback(() => {
       async function fetchMovies() {
         try {
-          const res = await fetch("/.netlify/functions/getMovieOfTheDay");
-          if (!res.ok) throw new Error("Failed to fetch movie data");
+          const res = await fetch("/.netlify/functions/getDailyCache");
+          if (!res.ok) throw new Error("Failed to fetch cached data");
           const result = await res.json();
 
-          interface MovieApiResponse {
-            title: string;
-            overview: string;
-            releaseDate: string;
-            rating: number;
-            posterUrl?: string;
-            tmdbUrl: string;
-          }
-          
-          const transform = (movie: MovieApiResponse): MovieCardData => ({          
+          const movies = result.movie; // Access the `movie` key
+          if (!movies) throw new Error("No movie data available in cache");
+
+          const transform = (movie: any): MovieCardData => ({
             title: movie.title || "Untitled",
             description: `
               Released: ${movie.releaseDate || "Unknown"}<br/>
@@ -59,9 +58,9 @@ export default function Movies() {
           });
 
           setData({
-            movieOfTheDay: result.movieOfTheDay ? transform(result.movieOfTheDay) : null,
-            animatedMovieOfTheDay: result.animatedMovieOfTheDay ? transform(result.animatedMovieOfTheDay) : null,
-            horrorMovieOfTheDay: result.horrorMovieOfTheDay ? transform(result.horrorMovieOfTheDay) : null,
+            movieOfTheDay: movies.movieOfTheDay ? transform(movies.movieOfTheDay) : null,
+            animatedMovieOfTheDay: movies.animatedMovieOfTheDay ? transform(movies.animatedMovieOfTheDay) : null,
+            horrorMovieOfTheDay: movies.horrorMovieOfTheDay ? transform(movies.horrorMovieOfTheDay) : null,
           });
 
           setLoading(false);
@@ -107,8 +106,8 @@ export default function Movies() {
     <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
       <h1 className="text-4xl font-bold mb-10">Movies of the Day</h1>
       <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-center max-w-7xl mx-auto">
-        <MovieSection title="Movie of the Day" content={data.movieOfTheDay} type="movie" />
         <MovieSection title="Animated Movie of the Day" content={data.animatedMovieOfTheDay} type="animated" />
+        <MovieSection title="Movie of the Day" content={data.movieOfTheDay} type="movie" />
         <MovieSection title="Horror Movie of the Day" content={data.horrorMovieOfTheDay} type="horror" />
       </div>
       <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">

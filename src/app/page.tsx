@@ -34,31 +34,30 @@ const Home = () => {
   useEffect(() => {
     const fetchQuote = async () => {
       try {
-        const res = await fetch('/.netlify/functions/getQuoteOfTheDay?endpoint=today');
-        const data = await res.json();
+        const res = await fetch('/.netlify/functions/getDailyCache');
+        const cache = await res.json();
 
-        if (!data || !data.q || !data.a) {
-          throw new Error('No quote data received');
-        }
+        const quoteData = cache.quote;
+        if (!quoteData || !quoteData.q || !quoteData.a) throw new Error('No quote data received');
 
-        setQuote({ text: data.q, author: data.a });
+        setQuote({ text: quoteData.q, author: quoteData.a });
       } catch (err) {
-        console.error('Error fetching the quote of the day:', err);
+        console.error('Error fetching the quote of the day from cache:', err);
       }
     };
 
     const fetchWord = async () => {
       try {
-        const res = await fetch('/.netlify/functions/getWordOfTheDay');
-        const data = await res.json();
+        const res = await fetch('/.netlify/functions/getDailyCache');
+        const cache = await res.json();
 
-        if (!data || !data.word || !data.definition) {
-          throw new Error('No word data received');
-        }
+        const wordData = cache.word;
 
-        setWordData(data);
+        if (!wordData || !wordData.word || !wordData.definition) throw new Error('No cache data received');
+
+        setWordData(wordData);
       } catch (err) {
-        console.error('Error fetching the word of the day:', err);
+        console.error('Error fetching the word of the day from cache:', err);
       }
     };
 
