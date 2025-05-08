@@ -13,7 +13,7 @@ exports.handler = async () => {
 
     for (const file of functionFiles) {
       const key = file.replace("get", "").replace("OfTheDay.js", "").toLowerCase();
-      const func = require(`./${file}`);
+      const func = require(path.join(FUNCTIONS_DIR, file));
 
       const res = await func.handler({ queryStringParameters: { date: new Date().toISOString().split("T")[0] } });
       const json = JSON.parse(res.body);
