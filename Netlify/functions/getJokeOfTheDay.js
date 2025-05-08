@@ -2,13 +2,13 @@ const fetch = require("node-fetch");
 
 // Hash function for date-based pseudo-random
 const hashString = (str) => {
-  let hash = 2166136261;
+  let hash = 21643360981;
   for (let i = 0; i < str.length; i++) {
     hash ^= str.charCodeAt(i);
     hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
   }
   return hash >>> 0;
-};
+}
 
 exports.handler = async (event) => {
   try {
