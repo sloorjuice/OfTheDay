@@ -11,16 +11,36 @@ interface MovieCardData {
   extra: JSX.Element;
 }
 
+interface Movie {
+  title: string;
+  releaseDate?: string;
+  rating?: string;
+  posterUrl?: string;
+  tmdbUrl?: string;
+}
+
 interface MovieData {
   [key: string]: MovieCardData | null;
 }
 
-// Map keys to titles, types, and labels for rendering
-const contentMap = [
-  { key: "movieOfTheDay", title: "Movie of the Day" },
-  { key: "animatedMovieOfTheDay", title: "Animated Movie" },
-  { key: "horrorMovieOfTheDay", title: "Horror Highlight" },
-];
+const transform = (movie: Movie): MovieCardData => ({
+  title: movie.title || "Untitled",
+  description: `
+    Released: ${movie.releaseDate || "Unknown"}<br/>
+    Rating: ${movie.rating || "N/A"}
+  `,
+  image: movie.posterUrl,
+  extra: (
+    <a
+      href={movie.tmdbUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-400 underline"
+    >
+      View on TMDB
+    </a>
+  ),
+});
 
 export default function Movies() {
   const [data, setData] = useState<MovieData | null>(null);
@@ -37,25 +57,6 @@ export default function Movies() {
 
           const movies = result.movie; // Access the `movie` key
           if (!movies) throw new Error("No movie data available in cache");
-
-          const transform = (movie: any): MovieCardData => ({
-            title: movie.title || "Untitled",
-            description: `
-              Released: ${movie.releaseDate || "Unknown"}<br/>
-              Rating: ${movie.rating || "N/A"}
-            `,
-            image: movie.posterUrl,
-            extra: (
-              <a
-                href={movie.tmdbUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-400 underline"
-              >
-                View on TMDB
-              </a>
-            ),
-          });
 
           setData({
             movieOfTheDay: movies.movieOfTheDay ? transform(movies.movieOfTheDay) : null,

@@ -143,7 +143,7 @@ export default function Games() {
 
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
             Every day at OfTheDay.world, we feature a selection of games and Pokémon for you to discover.
-            Whether you're hunting for a hidden gem or catching your favorite Pokémon, check back daily for a new surprise!
+            Whether you&apos;re hunting for a hidden gem or catching your favorite Pokémon, check back daily for a new surprise!
           </p>
         </>
       )}
