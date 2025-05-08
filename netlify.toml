@@ -11,4 +11,4 @@
   schedule = "0 0 * * *"
   
 [[plugins]]
-  package = "./netlify/plugins/run-once"
+  package = "./Netlify/plugins/run-once"
