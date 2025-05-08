@@ -36,3 +36,7 @@ exports.handler = async () => {
     };
   }
 };
+
+if (require.main === module) {
+  exports.handler().then(console.log).catch(console.error);
+}
