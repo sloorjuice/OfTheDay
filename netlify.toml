@@ -9,6 +9,3 @@
 
 [functions."cacheDailyData"]
   schedule = "0 0 * * *"
-  
-[[plugins]]
-  package = "./Netlify/plugins/run-once"
