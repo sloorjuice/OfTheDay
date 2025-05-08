@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const CACHE_FILE = path.resolve(__dirname, "../../dailyCache.json");
+const CACHE_FILE = path.resolve("/tmp/dailyCache.json");
 
 exports.handler = async () => {
   try {

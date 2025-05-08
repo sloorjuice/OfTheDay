@@ -1,12 +1,12 @@
-const fs = require("fs");
 const path = require("path");
+const fs = require("fs");
 
-const FUNCTIONS_DIR = path.resolve(__dirname);
-const CACHE_FILE = path.resolve(__dirname, "../../dailyCache.json");
+const CACHE_FILE = path.resolve("/tmp/dailyCache.json");
 
 exports.handler = async () => {
   try {
     const cache = {};
+    const FUNCTIONS_DIR = __dirname;
 
     const functionFiles = fs.readdirSync(FUNCTIONS_DIR)
       .filter(name => name.startsWith("get") && name.endsWith("OfTheDay.js"));
