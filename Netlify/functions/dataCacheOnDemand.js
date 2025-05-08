@@ -7,6 +7,7 @@ exports.handler = async () => {
   try {
     const cache = {};
     const FUNCTIONS_DIR = __dirname;
+    
 
     const functionFiles = fs.readdirSync(FUNCTIONS_DIR)
       .filter(name => name.startsWith("get") && name.endsWith("OfTheDay.js"));
@@ -27,7 +28,7 @@ exports.handler = async () => {
 
     return {
       statusCode: 200,
-      body: "Cache updated successfully"
+      body: "Cache updated on demand successfully"
     };
   } catch (err) {
     return {
