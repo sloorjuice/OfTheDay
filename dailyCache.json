@@ -1,0 +1,959 @@
+{
+  "album": {
+    "name": "TRENCH",
+    "artist": "Audrey Nuna",
+    "url": "https://www.deezer.com/album/642027701",
+    "images": [
+      {
+        "url": "https://cdn-images.dzcdn.net/images/cover/e8f1dfd7d8ff18048f312f26aa98ede1/250x250-000000-80-0-0.jpg"
+      }
+    ]
+  },
+  "artist": {
+    "name": "J Balvin",
+    "url": "https://www.deezer.com/artist/4860761",
+    "images": [
+      {
+        "url": "https://cdn-images.dzcdn.net/images/artist/c5cd33708174e92c8e17d3c35fd8a033/250x250-000000-80-0-0.jpg"
+      }
+    ]
+  },
+  "book": {
+    "title": "Journey to the Center of the Earth",
+    "author": "Jules Verne",
+    "description": "The intrepid Professor Lindenbrock embarks upon the strangest expedition of the nineteenth century: a journey down an extinct Icelandic volcano to the Earth’s very core. In his quest to penetrate the planet’s primordial secrets, the geologist—together with his quaking nephew Axel and their devoted guide, Hans—discovers an astonishing subterranean menagerie of prehistoric proportions. Verne’s imaginative tale is at once the ultimate science fiction adventure and a reflection on the perfectibility of human understanding and the psychology of the questor. As David Brin notes in his Introduction, though Verne never knew the term “science fiction,” Journey to the Centre of the Earth is “inarguably one of the wellsprings from which it all began.”",
+    "image": "http://books.google.com/books/content?id=icKmd-tlvPMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+    "link": "https://play.google.com/store/books/details?id=icKmd-tlvPMC&source=gbs_api",
+    "date": "2025-05-06"
+  },
+  "game": {
+    "date": "2025-05-06",
+    "selectedGenre": "fighting",
+    "gameOfTheDay": {
+      "slug": "sonic-mega-collection",
+      "name": "Sonic Mega Collection",
+      "playtime": 0,
+      "platforms": [
+        {
+          "platform": {
+            "id": 15,
+            "name": "PlayStation 2",
+            "slug": "playstation2"
+          }
+        },
+        {
+          "platform": {
+            "id": 105,
+            "name": "GameCube",
+            "slug": "gamecube"
+          }
+        }
+      ],
+      "stores": null,
+      "released": "2002-11-10",
+      "tba": false,
+      "background_image": "https://media.rawg.io/media/screenshots/40d/40d936fb71dfd846350cb4443f9e037f.jpg",
+      "rating": 4.4,
+      "rating_top": 4,
+      "ratings": [
+        {
+          "id": 4,
+          "title": "recommended",
+          "count": 6,
+          "percent": 60
+        },
+        {
+          "id": 5,
+          "title": "exceptional",
+          "count": 4,
+          "percent": 40
+        }
+      ],
+      "ratings_count": 10,
+      "reviews_text_count": 0,
+      "added": 40,
+      "added_by_status": {
+        "yet": 5,
+        "owned": 16,
+        "beaten": 9,
+        "toplay": 4,
+        "dropped": 6
+      },
+      "metacritic": 75,
+      "suggestions_count": 248,
+      "updated": "2024-05-23T16:28:50",
+      "id": 56204,
+      "score": null,
+      "clip": null,
+      "tags": [
+        {
+          "id": 31,
+          "name": "Singleplayer",
+          "slug": "singleplayer",
+          "language": "eng",
+          "games_count": 225190,
+          "image_background": "https://media.rawg.io/media/games/fc1/fc1307a2774506b5bd65d7e8424664a7.jpg"
+        },
+        {
+          "id": 7,
+          "name": "Multiplayer",
+          "slug": "multiplayer",
+          "language": "eng",
+          "games_count": 38291,
+          "image_background": "https://media.rawg.io/media/games/f46/f466571d536f2e3ea9e815ad17177501.jpg"
+        }
+      ],
+      "esrb_rating": {
+        "id": 1,
+        "name": "Everyone",
+        "slug": "everyone",
+        "name_en": "Everyone",
+        "name_ru": "Для всех"
+      },
+      "user_game": null,
+      "reviews_count": 10,
+      "saturated_color": "0f0f0f",
+      "dominant_color": "0f0f0f",
+      "short_screenshots": [
+        {
+          "id": -1,
+          "image": "https://media.rawg.io/media/screenshots/40d/40d936fb71dfd846350cb4443f9e037f.jpg"
+        },
+        {
+          "id": 753163,
+          "image": "https://media.rawg.io/media/screenshots/4d9/4d91022747b9033e66fc58f353b1cf8d.jpg"
+        },
+        {
+          "id": 753164,
+          "image": "https://media.rawg.io/media/screenshots/e87/e871d2db8dc941cd74825e1d2f88dd99.jpg"
+        },
+        {
+          "id": 753165,
+          "image": "https://media.rawg.io/media/screenshots/459/4592a747d6da8161c61abd20b70a134b.jpg"
+        },
+        {
+          "id": 753166,
+          "image": "https://media.rawg.io/media/screenshots/4fa/4fa002126c3f8f8501201afdf1f894ac.jpg"
+        },
+        {
+          "id": 753167,
+          "image": "https://media.rawg.io/media/screenshots/8b5/8b5509309cbb38c29b9a09799796c00d.jpg"
+        },
+        {
+          "id": 753168,
+          "image": "https://media.rawg.io/media/screenshots/3d7/3d7241c444917abb7e6b9d687a82aac1.jpg"
+        }
+      ],
+      "parent_platforms": [
+        {
+          "platform": {
+            "id": 2,
+            "name": "PlayStation",
+            "slug": "playstation"
+          }
+        },
+        {
+          "platform": {
+            "id": 7,
+            "name": "Nintendo",
+            "slug": "nintendo"
+          }
+        }
+      ],
+      "genres": [
+        {
+          "id": 83,
+          "name": "Platformer",
+          "slug": "platformer"
+        },
+        {
+          "id": 4,
+          "name": "Action",
+          "slug": "action"
+        },
+        {
+          "id": 6,
+          "name": "Fighting",
+          "slug": "fighting"
+        },
+        {
+          "id": 7,
+          "name": "Puzzle",
+          "slug": "puzzle"
+        }
+      ]
+    },
+    "multiplayerGameOfTheDay": {
+      "slug": "quiplash-2-interlashional",
+      "name": "Quiplash 2 Interlashional: The Say Anything Party Game!",
+      "playtime": 1,
+      "platforms": [
+        {
+          "platform": {
+            "id": 4,
+            "name": "PC",
+            "slug": "pc"
+          }
+        },
+        {
+          "platform": {
+            "id": 1,
+            "name": "Xbox One",
+            "slug": "xbox-one"
+          }
+        },
+        {
+          "platform": {
+            "id": 18,
+            "name": "PlayStation 4",
+            "slug": "playstation4"
+          }
+        },
+        {
+          "platform": {
+            "id": 7,
+            "name": "Nintendo Switch",
+            "slug": "nintendo-switch"
+          }
+        },
+        {
+          "platform": {
+            "id": 5,
+            "name": "macOS",
+            "slug": "macos"
+          }
+        },
+        {
+          "platform": {
+            "id": 6,
+            "name": "Linux",
+            "slug": "linux"
+          }
+        }
+      ],
+      "stores": [
+        {
+          "store": {
+            "id": 1,
+            "name": "Steam",
+            "slug": "steam"
+          }
+        },
+        {
+          "store": {
+            "id": 3,
+            "name": "PlayStation Store",
+            "slug": "playstation-store"
+          }
+        },
+        {
+          "store": {
+            "id": 2,
+            "name": "Xbox Store",
+            "slug": "xbox-store"
+          }
+        },
+        {
+          "store": {
+            "id": 6,
+            "name": "Nintendo Store",
+            "slug": "nintendo"
+          }
+        }
+      ],
+      "released": "2020-04-08",
+      "tba": false,
+      "background_image": "https://media.rawg.io/media/screenshots/9b9/9b9846370e68a79f612b2abc5b687394.jpg",
+      "rating": 4.5,
+      "rating_top": 5,
+      "ratings": [
+        {
+          "id": 5,
+          "title": "exceptional",
+          "count": 3,
+          "percent": 50
+        },
+        {
+          "id": 4,
+          "title": "recommended",
+          "count": 3,
+          "percent": 50
+        }
+      ],
+      "ratings_count": 6,
+      "reviews_text_count": 0,
+      "added": 75,
+      "added_by_status": {
+        "yet": 1,
+        "owned": 62,
+        "beaten": 5,
+        "toplay": 2,
+        "dropped": 5
+      },
+      "metacritic": null,
+      "suggestions_count": 69,
+      "updated": "2024-01-15T09:32:01",
+      "id": 525682,
+      "score": null,
+      "clip": null,
+      "tags": [
+        {
+          "id": 40847,
+          "name": "Steam Achievements",
+          "slug": "steam-achievements",
+          "language": "eng",
+          "games_count": 45242,
+          "image_background": "https://media.rawg.io/media/games/198/1988a337305e008b41d7f536ce9b73f6.jpg"
+        },
+        {
+          "id": 42398,
+          "name": "Инди",
+          "slug": "indi-2",
+          "language": "rus",
+          "games_count": 62263,
+          "image_background": "https://media.rawg.io/media/games/5be/5bec14622f6faf804a592176577c1347.jpg"
+        },
+        {
+          "id": 7,
+          "name": "Multiplayer",
+          "slug": "multiplayer",
+          "language": "eng",
+          "games_count": 40575,
+          "image_background": "https://media.rawg.io/media/games/b8c/b8c243eaa0fbac8115e0cdccac3f91dc.jpg"
+        },
+        {
+          "id": 40836,
+          "name": "Full controller support",
+          "slug": "full-controller-support",
+          "language": "eng",
+          "games_count": 21335,
+          "image_background": "https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg"
+        },
+        {
+          "id": 40849,
+          "name": "Steam Cloud",
+          "slug": "steam-cloud",
+          "language": "eng",
+          "games_count": 21933,
+          "image_background": "https://media.rawg.io/media/games/be0/be01c3d7d8795a45615da139322ca080.jpg"
+        },
+        {
+          "id": 18,
+          "name": "Co-op",
+          "slug": "co-op",
+          "language": "eng",
+          "games_count": 13165,
+          "image_background": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg"
+        },
+        {
+          "id": 42399,
+          "name": "Казуальная игра",
+          "slug": "kazualnaia-igra",
+          "language": "rus",
+          "games_count": 48619,
+          "image_background": "https://media.rawg.io/media/games/852/8522935d8ab27b610a254b52de0da212.jpg"
+        },
+        {
+          "id": 42482,
+          "name": "Смешная",
+          "slug": "smeshnaia",
+          "language": "rus",
+          "games_count": 11099,
+          "image_background": "https://media.rawg.io/media/games/e04/e04963f3ac4c4fa83a1dc0b9231e50db.jpg"
+        },
+        {
+          "id": 4,
+          "name": "Funny",
+          "slug": "funny",
+          "language": "eng",
+          "games_count": 27088,
+          "image_background": "https://media.rawg.io/media/games/46d/46d98e6910fbc0706e2948a7cc9b10c5.jpg"
+        },
+        {
+          "id": 42481,
+          "name": "Юмор",
+          "slug": "iumor",
+          "language": "rus",
+          "games_count": 7100,
+          "image_background": "https://media.rawg.io/media/games/5bb/5bb55ccb8205aadbb6a144cf6d8963f1.jpg"
+        },
+        {
+          "id": 123,
+          "name": "Comedy",
+          "slug": "comedy",
+          "language": "eng",
+          "games_count": 13759,
+          "image_background": "https://media.rawg.io/media/games/48c/48cb04ca483be865e3a83119c94e6097.jpg"
+        },
+        {
+          "id": 198,
+          "name": "Split Screen",
+          "slug": "split-screen",
+          "language": "eng",
+          "games_count": 7474,
+          "image_background": "https://media.rawg.io/media/games/f95/f95ec06eddda5c5bf206618c49cd3e68.jpg"
+        },
+        {
+          "id": 42449,
+          "name": "Локальный мультиплеер",
+          "slug": "lokalnyi-multipleer",
+          "language": "rus",
+          "games_count": 4101,
+          "image_background": "https://media.rawg.io/media/games/e74/e74458058b35e01c1ae3feeb39a3f724.jpg"
+        },
+        {
+          "id": 72,
+          "name": "Local Multiplayer",
+          "slug": "local-multiplayer",
+          "language": "eng",
+          "games_count": 13650,
+          "image_background": "https://media.rawg.io/media/games/e0f/e0f05a97ff926acf4c8f43e0849b6832.jpg"
+        },
+        {
+          "id": 157,
+          "name": "PvP",
+          "slug": "pvp",
+          "language": "eng",
+          "games_count": 10864,
+          "image_background": "https://media.rawg.io/media/games/cc7/cc77035eb972f179f5090ee2a0fabd99.jpg"
+        },
+        {
+          "id": 413,
+          "name": "online",
+          "slug": "online",
+          "language": "eng",
+          "games_count": 6554,
+          "image_background": "https://media.rawg.io/media/games/9ca/9ca31615beee447f3ae1dc9b3b736dce.jpg"
+        },
+        {
+          "id": 625,
+          "name": "party",
+          "slug": "party",
+          "language": "eng",
+          "games_count": 4186,
+          "image_background": "https://media.rawg.io/media/screenshots/ec6/ec659635f538be22bab35d9c402f774b.jpg"
+        },
+        {
+          "id": 45201,
+          "name": "Remote Play Together",
+          "slug": "remote-play-together",
+          "language": "eng",
+          "games_count": 3511,
+          "image_background": "https://media.rawg.io/media/games/a4c/a4c1fd4265ac2c1edc87cb9a6a7644e4.jpg"
+        },
+        {
+          "id": 46112,
+          "name": "Shared/Split Screen Co-op",
+          "slug": "sharedsplit-screen-co-op",
+          "language": "eng",
+          "games_count": 2279,
+          "image_background": "https://media.rawg.io/media/games/754/754682412d9f60949d15b04ff460dd20.jpg"
+        },
+        {
+          "id": 43374,
+          "name": "Remote Play on TV",
+          "slug": "remote-play-on-tv",
+          "language": "eng",
+          "games_count": 552,
+          "image_background": "https://media.rawg.io/media/games/64e/64e2a77f37ddc48d102127234af99886.jpg"
+        },
+        {
+          "id": 46114,
+          "name": "Shared/Split Screen PvP",
+          "slug": "sharedsplit-screen-pvp",
+          "language": "eng",
+          "games_count": 2562,
+          "image_background": "https://media.rawg.io/media/games/dfe/dfe14d30ed6fccd9db4ae79d3be51d54.jpg"
+        },
+        {
+          "id": 43578,
+          "name": "Remote Play on Tablet",
+          "slug": "remote-play-on-tablet",
+          "language": "eng",
+          "games_count": 233,
+          "image_background": "https://media.rawg.io/media/games/538/538b320977e1075eb279e381e6b92cc8.jpg"
+        },
+        {
+          "id": 43577,
+          "name": "Remote Play on Phone",
+          "slug": "remote-play-on-phone",
+          "language": "eng",
+          "games_count": 229,
+          "image_background": "https://media.rawg.io/media/screenshots/8a1/8a1c80ad1bf419ffbdb8b0c210e73012.jpg"
+        },
+        {
+          "id": 5777,
+          "name": "pack",
+          "slug": "pack",
+          "language": "eng",
+          "games_count": 2699,
+          "image_background": "https://media.rawg.io/media/games/d38/d389186cb8ce5b40f74bcf48d90d8e4c.jpg"
+        }
+      ],
+      "esrb_rating": null,
+      "user_game": null,
+      "reviews_count": 6,
+      "saturated_color": "0f0f0f",
+      "dominant_color": "0f0f0f",
+      "short_screenshots": [
+        {
+          "id": -1,
+          "image": "https://media.rawg.io/media/screenshots/9b9/9b9846370e68a79f612b2abc5b687394.jpg"
+        },
+        {
+          "id": 2340190,
+          "image": "https://media.rawg.io/media/screenshots/ba9/ba9311dd3bfabba02d0a0602718a4913.jpg"
+        },
+        {
+          "id": 2340191,
+          "image": "https://media.rawg.io/media/screenshots/e17/e17362742002d2d20d67911974838ce3.jpg"
+        },
+        {
+          "id": 2340192,
+          "image": "https://media.rawg.io/media/screenshots/b77/b77d425ff056f794d50454c767a3059d.jpg"
+        },
+        {
+          "id": 2340193,
+          "image": "https://media.rawg.io/media/screenshots/f90/f90f8af6be0924e4499fc462f96ed683.jpg"
+        },
+        {
+          "id": 2340194,
+          "image": "https://media.rawg.io/media/screenshots/252/252f015ca468baa338c1300a501370ae.jpg"
+        },
+        {
+          "id": 2340195,
+          "image": "https://media.rawg.io/media/screenshots/2da/2dae0cd6d5f3f5cb1bfd75516ee258bc.jpg"
+        }
+      ],
+      "parent_platforms": [
+        {
+          "platform": {
+            "id": 1,
+            "name": "PC",
+            "slug": "pc"
+          }
+        },
+        {
+          "platform": {
+            "id": 2,
+            "name": "PlayStation",
+            "slug": "playstation"
+          }
+        },
+        {
+          "platform": {
+            "id": 3,
+            "name": "Xbox",
+            "slug": "xbox"
+          }
+        },
+        {
+          "platform": {
+            "id": 5,
+            "name": "Apple Macintosh",
+            "slug": "mac"
+          }
+        },
+        {
+          "platform": {
+            "id": 6,
+            "name": "Linux",
+            "slug": "linux"
+          }
+        },
+        {
+          "platform": {
+            "id": 7,
+            "name": "Nintendo",
+            "slug": "nintendo"
+          }
+        }
+      ],
+      "genres": [
+        {
+          "id": 40,
+          "name": "Casual",
+          "slug": "casual"
+        },
+        {
+          "id": 51,
+          "name": "Indie",
+          "slug": "indie"
+        }
+      ]
+    },
+    "indieGameOfTheDay": {
+      "slug": "pocket-kingdom",
+      "name": "Pocket Kingdom",
+      "playtime": 4,
+      "platforms": [
+        {
+          "platform": {
+            "id": 4,
+            "name": "PC",
+            "slug": "pc"
+          }
+        },
+        {
+          "platform": {
+            "id": 5,
+            "name": "macOS",
+            "slug": "macos"
+          }
+        },
+        {
+          "platform": {
+            "id": 6,
+            "name": "Linux",
+            "slug": "linux"
+          }
+        }
+      ],
+      "stores": [
+        {
+          "store": {
+            "id": 1,
+            "name": "Steam",
+            "slug": "steam"
+          }
+        }
+      ],
+      "released": "2016-12-08",
+      "tba": false,
+      "background_image": "https://media.rawg.io/media/screenshots/70d/70d787b34e4592c26ac16f8a9c6772df.jpg",
+      "rating": 4.5,
+      "rating_top": 5,
+      "ratings": [
+        {
+          "id": 5,
+          "title": "exceptional",
+          "count": 3,
+          "percent": 50
+        },
+        {
+          "id": 4,
+          "title": "recommended",
+          "count": 3,
+          "percent": 50
+        }
+      ],
+      "ratings_count": 6,
+      "reviews_text_count": 0,
+      "added": 211,
+      "added_by_status": {
+        "yet": 5,
+        "owned": 195,
+        "beaten": 3,
+        "toplay": 5,
+        "dropped": 2,
+        "playing": 1
+      },
+      "metacritic": null,
+      "suggestions_count": 288,
+      "updated": "2019-09-17T11:51:46",
+      "id": 12203,
+      "score": null,
+      "clip": null,
+      "tags": [
+        {
+          "id": 31,
+          "name": "Singleplayer",
+          "slug": "singleplayer",
+          "language": "eng",
+          "games_count": 233799,
+          "image_background": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg"
+        },
+        {
+          "id": 42392,
+          "name": "Приключение",
+          "slug": "prikliuchenie",
+          "language": "rus",
+          "games_count": 42134,
+          "image_background": "https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg"
+        },
+        {
+          "id": 40847,
+          "name": "Steam Achievements",
+          "slug": "steam-achievements",
+          "language": "eng",
+          "games_count": 42725,
+          "image_background": "https://media.rawg.io/media/games/be0/be01c3d7d8795a45615da139322ca080.jpg"
+        },
+        {
+          "id": 42398,
+          "name": "Инди",
+          "slug": "indi-2",
+          "language": "rus",
+          "games_count": 59945,
+          "image_background": "https://media.rawg.io/media/games/dd5/dd50d4266915d56dd5b63ae1bf72606a.jpg"
+        },
+        {
+          "id": 40836,
+          "name": "Full controller support",
+          "slug": "full-controller-support",
+          "language": "eng",
+          "games_count": 20204,
+          "image_background": "https://media.rawg.io/media/games/be0/be01c3d7d8795a45615da139322ca080.jpg"
+        },
+        {
+          "id": 40849,
+          "name": "Steam Cloud",
+          "slug": "steam-cloud",
+          "language": "eng",
+          "games_count": 20511,
+          "image_background": "https://media.rawg.io/media/games/713/713269608dc8f2f40f5a670a14b2de94.jpg"
+        },
+        {
+          "id": 7808,
+          "name": "steam-trading-cards",
+          "slug": "steam-trading-cards",
+          "language": "eng",
+          "games_count": 7568,
+          "image_background": "https://media.rawg.io/media/games/da1/da1b267764d77221f07a4386b6548e5a.jpg"
+        },
+        {
+          "id": 45,
+          "name": "2D",
+          "slug": "2d",
+          "language": "eng",
+          "games_count": 199965,
+          "image_background": "https://media.rawg.io/media/games/f90/f90ee1a4239247a822771c40488e68c5.jpg"
+        },
+        {
+          "id": 42465,
+          "name": "Головоломка",
+          "slug": "golovolomka",
+          "language": "rus",
+          "games_count": 17805,
+          "image_background": "https://media.rawg.io/media/games/b45/b45575f34285f2c4479c9a5f719d972e.jpg"
+        },
+        {
+          "id": 42415,
+          "name": "Пиксельная графика",
+          "slug": "pikselnaia-grafika",
+          "language": "rus",
+          "games_count": 14560,
+          "image_background": "https://media.rawg.io/media/games/e04/e04963f3ac4c4fa83a1dc0b9231e50db.jpg"
+        },
+        {
+          "id": 122,
+          "name": "Pixel Graphics",
+          "slug": "pixel-graphics",
+          "language": "eng",
+          "games_count": 95644,
+          "image_background": "https://media.rawg.io/media/games/3be/3be0e624424d3453005019799a760af2.jpg"
+        }
+      ],
+      "esrb_rating": null,
+      "user_game": null,
+      "reviews_count": 6,
+      "saturated_color": "0f0f0f",
+      "dominant_color": "0f0f0f",
+      "short_screenshots": [
+        {
+          "id": -1,
+          "image": "https://media.rawg.io/media/screenshots/70d/70d787b34e4592c26ac16f8a9c6772df.jpg"
+        },
+        {
+          "id": 101719,
+          "image": "https://media.rawg.io/media/screenshots/215/2151038051b5d9cfbda71e2d6ee48b94.jpg"
+        },
+        {
+          "id": 101720,
+          "image": "https://media.rawg.io/media/screenshots/03f/03f105d18a9f8efa92150d3d55753d32.jpg"
+        },
+        {
+          "id": 101721,
+          "image": "https://media.rawg.io/media/screenshots/da8/da81ce4b2368f8841a5354ff0ae1239b.jpg"
+        },
+        {
+          "id": 101722,
+          "image": "https://media.rawg.io/media/screenshots/a39/a39d8be34c6108ea3f3050ad7f222e73.jpg"
+        },
+        {
+          "id": 101723,
+          "image": "https://media.rawg.io/media/screenshots/f24/f24ffb9f770da8dbc11e929ba10da968.jpg"
+        },
+        {
+          "id": 101724,
+          "image": "https://media.rawg.io/media/screenshots/f1e/f1e0a39c47f09b9f1cd90e84c7c9b385.jpg"
+        }
+      ],
+      "parent_platforms": [
+        {
+          "platform": {
+            "id": 1,
+            "name": "PC",
+            "slug": "pc"
+          }
+        },
+        {
+          "platform": {
+            "id": 5,
+            "name": "Apple Macintosh",
+            "slug": "mac"
+          }
+        },
+        {
+          "platform": {
+            "id": 6,
+            "name": "Linux",
+            "slug": "linux"
+          }
+        }
+      ],
+      "genres": [
+        {
+          "id": 51,
+          "name": "Indie",
+          "slug": "indie"
+        },
+        {
+          "id": 3,
+          "name": "Adventure",
+          "slug": "adventure"
+        }
+      ]
+    }
+  },
+  "joke": {
+    "category": "Dark",
+    "joke": "Why do Africans have dark skin? ... It's easier to commit crimes at night."
+  },
+  "movie": {
+    "date": "2025-05-06",
+    "movieOfTheDay": {
+      "title": "The Shawshank Redemption",
+      "overview": "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
+      "releaseDate": "1994-09-23",
+      "rating": 8.71,
+      "posterUrl": "https://image.tmdb.org/t/p/w500/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+      "tmdbUrl": "https://www.themoviedb.org/movie/278"
+    },
+    "animatedMovieOfTheDay": {
+      "title": "Shooom's Odyssey",
+      "overview": "Shooom, a baby owl, hatches just as a storm turns the bayou surrounding her tree upside down. No sooner has she fallen from her nest, then the little fledgling totters off into the mangrove, pushing a second egg from the brood along with her. Come hell or high water, she’s determined to find a mother… even if that mom turns out to be an alligator or a raccoon!",
+      "releaseDate": "2019-12-24",
+      "rating": 8.5,
+      "posterUrl": "https://image.tmdb.org/t/p/w500/fOoNsclGvm3RSMLKbEgPIcRkxRJ.jpg",
+      "tmdbUrl": "https://www.themoviedb.org/movie/641364"
+    },
+    "horrorMovieOfTheDay": {
+      "title": "National Theatre Live: Frankenstein",
+      "overview": "Childlike in his innocence but grotesque in form, Frankenstein’s bewildered creature is cast out into a hostile universe by his horror-struck maker. Meeting with cruelty wherever he goes, the friendless Creature, increasingly desperate and vengeful, determines to track down his creator and strike a terrifying deal.  Urgent concerns of scientific responsibility, parental neglect, cognitive development and the nature of good and evil are embedded within this thrilling and deeply disturbing tale.",
+      "releaseDate": "2011-03-17",
+      "rating": 8,
+      "posterUrl": "https://image.tmdb.org/t/p/w500/vmgxaqnO5N3PlPRAmJ4WMnpuAqb.jpg",
+      "tmdbUrl": "https://www.themoviedb.org/movie/203912"
+    }
+  },
+  "pokemon": {
+    "id": 684,
+    "name": "swirlix",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/684.png",
+    "types": [
+      "fairy"
+    ],
+    "stats": [
+      {
+        "name": "hp",
+        "value": 62
+      },
+      {
+        "name": "attack",
+        "value": 48
+      },
+      {
+        "name": "defense",
+        "value": 66
+      },
+      {
+        "name": "special-attack",
+        "value": 59
+      },
+      {
+        "name": "special-defense",
+        "value": 57
+      },
+      {
+        "name": "speed",
+        "value": 49
+      }
+    ]
+  },
+  "ram": {
+    "id": 340,
+    "name": "Supernova",
+    "image": "https://rickandmortyapi.com/api/character/avatar/340.jpeg",
+    "species": "Human",
+    "status": "Alive"
+  },
+  "song": {
+    "name": "Messy",
+    "artist": "Lola Young",
+    "url": "https://www.deezer.com/track/2815968782",
+    "album": {
+      "name": "Messy",
+      "images": [
+        {
+          "url": "https://cdn-images.dzcdn.net/images/cover/41b98b2c9cf64689c4c77569610e3cf1/250x250-000000-80-0-0.jpg"
+        }
+      ]
+    }
+  },
+  "southpark": {
+    "episode": {
+      "id": 206,
+      "title": "Coon 2: Hindsight",
+      "description": "\"Coon and Friends\" set out to help the victims of BP's latest catastrophic drilling accident in the Gulf. Much to the Coon's dismay, another Super Hero gets there first.\n",
+      "season": 14,
+      "episode": 11
+    },
+    "character": {
+      "id": 38,
+      "name": "Flo Kimble"
+    }
+  },
+  "tv": {
+    "date": "2025-05-06",
+    "tvShowOfTheDay": {
+      "title": "Klan",
+      "overview": "Family is the most important thing, and the children of Władysław and Maria Lubicz from Warsaw can always count on each other, no matter what surprises life offers.",
+      "firstAirDate": "1997-09-22",
+      "rating": 4.7,
+      "posterUrl": "https://image.tmdb.org/t/p/w500/vuSKqHmKLrKG2AYFOyQ4Ci9wTAj.jpg",
+      "tmdbUrl": "https://www.themoviedb.org/tv/6489"
+    },
+    "animeOfTheDay": {
+      "title": "Zeri Feisheng",
+      "synopsis": "In chaotic times, evil spirits are rampant and treacherous people are in power. At the same time, the underworld invaded, and the forces of the two worlds poisoned the human world. The snake catcher Xu Ying could not stand and watch the gods working for the underworld oppress the common people, so he rebelled and committed the crime of killing the gods. He also killed the court officials who did nothing. He was hunted down by the forces of the two worlds and began his life of escape...\n\n(Source: iQIYI, Google translated)",
+      "startDate": null,
+      "rating": null,
+      "imageUrl": "https://cdn.myanimelist.net/images/anime/1252/149604l.jpg",
+      "malUrl": "https://myanimelist.net/anime/61619/Zeri_Feisheng"
+    },
+    "dramaOfTheDay": {
+      "title": "Squid Game",
+      "overview": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes.",
+      "firstAirDate": "2021-09-17",
+      "rating": 7.9,
+      "posterUrl": "https://image.tmdb.org/t/p/w500/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
+      "tmdbUrl": "https://www.themoviedb.org/tv/93405"
+    },
+    "comedyOfTheDay": {
+      "title": "The Office",
+      "overview": "The everyday lives of office employees in the Scranton, Pennsylvania branch of the fictional Dunder Mifflin Paper Company.",
+      "firstAirDate": "2005-03-24",
+      "rating": 8.58,
+      "posterUrl": "https://image.tmdb.org/t/p/w500/dg9e5fPRRId8PoBE0F6jl5y85Eu.jpg",
+      "tmdbUrl": "https://www.themoviedb.org/tv/2316"
+    }
+  },
+  "word": {
+    "word": "conglobate",
+    "definition": "to form into a ball",
+    "partOfSpeech": "verb",
+    "examples": []
+  },
+  "date": "2025-05-06"
+}

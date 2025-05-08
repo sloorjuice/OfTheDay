@@ -6,3 +6,6 @@
 [dev]
   framework = "next"
   targetPort = 3000
+
+[functions."cacheDailyData"]
+  schedule = "0 0 * * *"
