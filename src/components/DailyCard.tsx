@@ -13,6 +13,7 @@ interface DailyCardProps {
 
 const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
   const [width, setWidth] = useState<number | null>(null);
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -44,6 +45,12 @@ const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
       </div>
     );
   }
+
+  // Only add "..." if the description is truncated
+  const truncatedDescription =
+    data.description.length > 150
+      ? data.description.slice(0, 150) + "..."
+      : data.description;
 
   return (
     <div
@@ -77,8 +84,20 @@ const DailyCard: React.FC<DailyCardProps> = ({ type, data }) => {
           </h3>
           <p
             className="text-white text-center"
-            dangerouslySetInnerHTML={{ __html: data.description }}
+            dangerouslySetInnerHTML={{
+              __html: showFullDescription
+                ? data.description
+                : truncatedDescription,
+            }}
           ></p>
+          {data.description.length > 150 && (
+            <button
+              onClick={() => setShowFullDescription(!showFullDescription)}
+              className="text-blue-400 underline"
+            >
+              {showFullDescription ? "See Less" : "See More"}
+            </button>
+          )}
           {data.extra && (
             <p className="text-blue-500 text-center w-full">{data.extra}</p>
           )}

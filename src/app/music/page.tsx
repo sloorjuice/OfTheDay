@@ -12,10 +12,14 @@ interface CardData {
 }
 
 interface MusicData {
-  songOfTheDay: CardData | null;
-  albumOfTheDay: CardData | null;
-  artistOfTheDay: CardData | null;
+  [key: string]: CardData | null;
 }
+
+const contentMap = [
+  { key: "song", title: "Song of the Day", label: "Listen on Deezer" },
+  { key: "album", title: "Album of the Day", label: "View on Deezer" },
+  { key: "artist", title: "Artist of the Day", label: "View on Deezer", description: "Artist of the Day" }
+];
 
 function Music() {
   const [data, setData] = useState<MusicData | null>(null);
@@ -24,88 +28,69 @@ function Music() {
 
   useEffect(() => {
     const idle = requestIdleCallback(() => {
-      async function fetchData() {
-        try {
-          const response = await fetch('/.netlify/functions/getSongOfTheDay');
-          if (!response.ok) throw new Error('Failed to fetch data');
-          const result = await response.json();
+      fetch("/.netlify/functions/getDailyCache")
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch data");
+          return res.json();
+        })
+        .then((result) => {
+          const formatted: MusicData = {};
 
-          const transformedData: MusicData = {
-            songOfTheDay: result.songOfTheDay && {
-              title: result.songOfTheDay.name,
-              description: `By: ${result.songOfTheDay.artist}`,
-              image: result.songOfTheDay.album.images[0]?.url,
-              extra: <a href={result.songOfTheDay.url} target="_blank" rel="noopener noreferrer">Listen on Deezer</a>,
-            },
-            albumOfTheDay: result.albumOfTheDay && {
-              title: result.albumOfTheDay.name,
-              description: `By: ${result.albumOfTheDay.artist}`,
-              image: result.albumOfTheDay.images[0]?.url,
-              extra: <a href={result.albumOfTheDay.url} target="_blank" rel="noopener noreferrer">View on Deezer</a>,
-            },
-            artistOfTheDay: result.artistOfTheDay && {
-              title: result.artistOfTheDay.name,
-              description: 'Artist of the Day',
-              image: result.artistOfTheDay.images[0]?.url,
-              extra: <a href={result.artistOfTheDay.url} target="_blank" rel="noopener noreferrer">View on Deezer</a>,
-            },
-          };
+          for (const { key, label, description } of contentMap) {
+            const entry = result[key];
+            if (entry) {
+              formatted[key] = {
+                title: entry.name,
+                description: description || `By: ${entry.artist}`,
+                image: entry.album?.images?.[0]?.url || entry.images?.[0]?.url,
+                extra: (
+                  <a href={entry.url} target="_blank" rel="noopener noreferrer">
+                    {label}
+                  </a>
+                )
+              };
+            } else {
+              formatted[key] = null;
+            }
+          }
 
-          setData(transformedData);
+          setData(formatted);
           setLoading(false);
-        } catch (err) {
-          setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        })
+        .catch((err) => {
+          setError(err instanceof Error ? err.message : "Unknown error");
           setLoading(false);
-        }
-      }
-      fetchData();
+        });
     });
+
     return () => cancelIdleCallback(idle);
   }, []);
-
-  if (loading) {
-    return (
-      <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
-        <h1 className="text-4xl font-bold mb-10">Music of the Day</h1>
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-        </div>
-        <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
-          Every day at OfTheDay.world, we randomly feature a fresh new song, album, and artist for you to discover. Whether you&apos;re hunting for new jams or just want some daily music inspiration, this is the place to be. Check back daily for something new!
-        </p>
-        <section className="mt-6 flex flex-col items-center">
-          <p className="text-gray-600 mb-2">
-            Explore our daily picks:
-          </p>
-          <ul className="flex justify-center">
-            <li><a href="/games" className="text-blue-500 hover:underline mx-2">Games</a></li>
-            <li><a href="/movies" className="text-blue-500 hover:underline mx-2">Movies</a></li>
-          </ul>
-        </section>
-      </main>
-    );
-  }
-
-  if (error) return <div className="music-page">Error: {error}</div>;
-  if (!data) return <div className="music-page">No data available.</div>;
 
   return (
     <main className="min-h-screen px-4 sm:px-8 py-12 text-center">
       <h1 className="text-4xl font-bold mb-10">Music of the Day</h1>
-      <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-center max-w-7xl mx-auto">
-        <Section title="Song of the Day" content={data.songOfTheDay} type="song" />
-        <Section title="Album of the Day" content={data.albumOfTheDay} type="album" />
-        <Section title="Artist of the Day" content={data.artistOfTheDay} type="artist" />
-      </div>
+
+      {loading ? (
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          {[...Array(3)].map((_, i) => <SkeletonCard key={i} />)}
+        </div>
+      ) : error ? (
+        <p className="text-red-500 text-lg">{error}</p>
+      ) : (
+        <div className="grid gap-10 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-center max-w-7xl mx-auto">
+          {contentMap.map(({ key, title }) => (
+            <Section key={key} title={title} content={data?.[key] ?? null} type={key} />
+          ))}
+        </div>
+      )}
+
       <p className="text-gray-600 mb-8 max-w-2xl mx-auto pt-8">
-        Every day at OfTheDay.world, we randomly feature a fresh new song, album, and artist for you to discover. Whether you&apos;re hunting for new jams or just want some daily music inspiration, this is the place to be. Check back daily for something new!
+        Every day at OfTheDay.world, we feature a fresh new song, album, and artist for you to discover.
+        Whether you&apos;re hunting for new jams or daily inspiration, this is the place to be.
       </p>
+
       <section className="mt-6 flex flex-col items-center">
-        <p className="text-gray-600 mb-2">
-          Explore our daily picks:
-        </p>
+        <p className="text-gray-600 mb-2">Explore our daily picks:</p>
         <ul className="flex justify-center">
           <li><a href="/games" className="text-blue-500 hover:underline mx-2">Games</a></li>
           <li><a href="/movies" className="text-blue-500 hover:underline mx-2">Movies</a></li>
