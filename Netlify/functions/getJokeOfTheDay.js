@@ -7,7 +7,7 @@ const hashString = (str) => {
     hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
   }
   return hash >>> 0;
-}
+};
 
 exports.handler = async (event) => {
   try {

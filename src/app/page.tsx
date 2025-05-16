@@ -34,47 +34,43 @@ const Home = () => {
   useEffect(() => {
     const fetchQuote = async () => {
       try {
-        const res = await fetch('/.netlify/functions/getDailyCache');
-        const cache = await res.json();
+        const res = await fetch('/.netlify/functions/FetchQuote?endpoint=today');
+        const data = await res.json();
 
-        const quoteData = cache.quote;
-        if (!quoteData || !quoteData.q || !quoteData.a) throw new Error('No quote data received');
+        if (!data || !data.q || !data.a) {
+          throw new Error('No quote data received');
+        }
 
-        setQuote({ text: quoteData.q, author: quoteData.a });
+        setQuote({ text: data.q, author: data.a });
       } catch (err) {
-        console.error('Error fetching the quote of the day from cache:', err);
+        console.error('Error fetching the quote of the day:', err);
       }
     };
 
     const fetchWord = async () => {
       try {
-        const res = await fetch('/.netlify/functions/getDailyCache');
-        const cache = await res.json();
+        const res = await fetch('/.netlify/functions/getWordOfTheDay');
+        const data = await res.json();
 
-        const wordData = cache.word;
+        if (!data || !data.word || !data.definition) {
+          throw new Error('No word data received');
+        }
 
-        if (!wordData || !wordData.word || !wordData.definition) throw new Error('No cache data received');
-
-        setWordData(wordData);
+        setWordData(data);
       } catch (err) {
-        console.error('Error fetching the word of the day from cache:', err);
+        console.error('Error fetching the word of the day:', err);
       }
     };
 
     const fetchJoke = async () => {
       try {
-        const res = await fetch('/.netlify/functions/getDailyCache');
-        const cache = await res.json();
-
-        const jokeData = cache.joke;
-        if (!jokeData || !jokeData.joke) throw new Error("No joke data in cache");
-
-        const jokeText = jokeData.joke;
-        const [setup, delivery] = jokeText.split(" ... ");
-
-        setJoke({ setup, delivery, category: jokeData.category });
+        const res = await fetch('/.netlify/functions/getJokeOfTheDay');
+        const data = await res.json();
+        if (!data || !data.joke) throw new Error("No joke data");
+        const [setup, delivery] = data.joke.split(" ... ");
+        setJoke({ setup, delivery, category: data.category });
       } catch (err) {
-        console.error("Error fetching joke of the day from cache:", err);
+        console.error("Error fetching joke of the day:", err);
       }
     }
 
