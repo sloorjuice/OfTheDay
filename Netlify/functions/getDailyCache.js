@@ -1,29 +1,33 @@
-const fs = require("fs");
-const path = require("path");
-
-const CACHE_FILE = path.resolve("/tmp/dailyCache.json");
+// getDailyCache.js (updated to use Firebase)
+const { db } = require("./FirebaseConfig");
+const { getDoc, doc } = require("firebase/firestore");
 
 exports.handler = async () => {
   try {
-    if (!fs.existsSync(CACHE_FILE)) {
+    // Get the latest cache from Firebase
+    const docRef = doc(db, "dailyCache", "latest");
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: "Cache not yet created." })
+        body: JSON.stringify({ message: "Cache not yet created in Firebase." })
       };
     }
 
-    const data = fs.readFileSync(CACHE_FILE, "utf8");
+    // Return the data from Firebase
     return {
       statusCode: 200,
-      body: data,
+      body: JSON.stringify(docSnap.data()),
       headers: {
         "Content-Type": "application/json"
       }
     };
   } catch (err) {
+    console.error("Firebase read error:", err);
     return {
       statusCode: 500,
-      body: `Cache read error: ${err.message}`
+      body: `Firebase read error: ${err.message}`
     };
   }
 };
