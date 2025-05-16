@@ -19,14 +19,6 @@ interface TvData {
   rmCharacterOfTheDay: TvCardData | null; // New property
 }
 
-interface CharacterData {
-  id: number;
-  name: string;
-  image: string;
-  species: string;
-  status: string;
-}
-
 interface TvApiResponse {
   title?: string;
   name?: string;
