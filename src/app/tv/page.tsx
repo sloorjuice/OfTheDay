@@ -19,6 +19,14 @@ interface TvData {
   rmCharacterOfTheDay: TvCardData | null; // New property
 }
 
+interface CharacterData {
+  id: number;
+  name: string;
+  image: string;
+  species: string;
+  status: string;
+}
+
 interface TvApiResponse {
   title?: string;
   name?: string;
@@ -51,7 +59,7 @@ export default function TV() {
           if (!characterRes.ok) throw new Error("Failed to fetch character data");
 
           const tvResult = await tvRes.json();
-          const characterResult = await characterRes.json(); // No type annotation
+          const characterResult = await characterRes.json();
 
           const transform = (item: TvApiResponse): TvCardData => ({
             title: item.title || item.name || "Untitled",
